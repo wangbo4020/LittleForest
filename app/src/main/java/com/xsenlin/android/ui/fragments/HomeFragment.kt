@@ -19,7 +19,13 @@ import com.xsenlin.android.ui.activities.BaseActivity
  */
 class HomeFragment : BaseFragment() {
 
-    val TAG = "HomeFragment";
+    companion object {
+        val TAG = "HomeFragment";
+
+        fun newInstance() : HomeFragment {
+            return HomeFragment()
+        }
+    }
 
     fun isTv(context : Context) : Boolean {
 

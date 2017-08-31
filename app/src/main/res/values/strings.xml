@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">小森林</string>
     <string name="action_settings">设置</string>
+
+    <string name="main_navi_home">首页</string>
+    <string name="main_navi_find">发现</string>
+    <string name="main_navi_mine">我的</string>
 </resources>
