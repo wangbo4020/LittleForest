@@ -1,11 +1,16 @@
 package com.xsenlin.android.ui.fragments
 
+import android.app.UiModeManager
+import android.content.Context
+import android.content.Context.UI_MODE_SERVICE
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.*
+import android.widget.TextView
 import com.xsenlin.android.R
 import com.xsenlin.android.ui.activities.BaseActivity
 
@@ -15,6 +20,12 @@ import com.xsenlin.android.ui.activities.BaseActivity
 class HomeFragment : BaseFragment() {
 
     val TAG = "HomeFragment";
+
+    fun isTv(context : Context) : Boolean {
+
+        return ((context.getSystemService(UI_MODE_SERVICE) as UiModeManager).currentModeType ==
+                Configuration.UI_MODE_TYPE_TELEVISION)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +37,9 @@ class HomeFragment : BaseFragment() {
 
         val toolbar = rootView.findViewById<Toolbar>(R.id.toolbar)
         (activity as BaseActivity).setSupportActionBar(toolbar)
+
+        (rootView.findViewById<TextView>(android.R.id.text1)).setText(
+                (if (isTv(context)) "Running on a TV Device" else "Running on a non-TV Device"))
 
         val fab = rootView.findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener { view ->
