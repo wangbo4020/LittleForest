@@ -7,6 +7,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
+import android.support.design.widget.TabLayout
+import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.*
@@ -20,12 +22,15 @@ import com.xsenlin.android.ui.activities.BaseActivity
 class HomeFragment : BaseFragment() {
 
     companion object {
-        val TAG = "HomeFragment";
+        val TAG = "HomeFragment"
 
         fun newInstance() : HomeFragment {
             return HomeFragment()
         }
     }
+
+    private var mTabLayout : TabLayout? = null
+    private var mViewPager : ViewPager? = null
 
     fun isTv(context : Context) : Boolean {
 
@@ -47,17 +52,19 @@ class HomeFragment : BaseFragment() {
         (rootView.findViewById<TextView>(android.R.id.text1)).setText(
                 (if (isTv(context)) "Running on a TV Device" else "Running on a non-TV Device"))
 
-        val fab = rootView.findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        mViewPager = rootView.findViewById(R.id.viewpager)
+        mTabLayout = rootView.findViewById(R.id.tablayout)
+        mTabLayout!!.setupWithViewPager(mViewPager)
+
+        if (savedInstanceState != null) {
+            var currentItem = savedInstanceState.getInt("CurrentItem")
+            mViewPager!!.setCurrentItem(currentItem)
         }
         return rootView
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        Log.d(TAG, "inflater " + (inflater == null))
         inflater!!.inflate(R.menu.menu_home, menu)
     }
 
@@ -70,5 +77,10 @@ class HomeFragment : BaseFragment() {
         return if (id == R.id.action_settings) {
             true
         } else super.onOptionsItemSelected(item)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("CurrentItem", mViewPager!!.currentItem)
     }
 }

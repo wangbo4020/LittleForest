@@ -1,8 +1,6 @@
 package com.xsenlin.android.ui.fragments
 
-import android.content.Context
 import android.os.Bundle
-import android.support.design.internal.BottomNavigationItemView
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -18,136 +16,101 @@ import com.xsenlin.android.R
 class MainFragment : BaseFragment(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     companion object {
-        val TAG = "MainFragment";
+        val TAG = "MainFragment"
     }
 
     private var mNaviBottom: BottomNavigationView? = null
 
-    private var mCurrentTag : String? = null
     private var mFrgmtHome: Fragment? = null
     private var mFrgmtFind: Fragment? = null
     private var mFrgmtMine: Fragment? = null
 
     init {
-        Log.d(TAG, "init: ")
+        setUpLifecycleLog(true, TAG)
     }
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        Log.d(TAG, "setUserVisibleHint: " + isVisibleToUser)
-    }
+    override fun onAttachFragment(childFragment: Fragment?) {
+        super.onAttachFragment(childFragment)
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        Log.d(TAG, "onAttach")
+        // 可能是现场恢复的Fragment
+        when (childFragment) {
+            is HomeFragment -> mFrgmtHome = childFragment
+            is MineFragment -> mFrgmtMine = childFragment
+        }
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate: " + savedInstanceState)
-
-        mFrgmtHome = HomeFragment.newInstance()
-        mFrgmtMine = MineFragment.newInstance()
+        // 如果Fragment被现场恢复，将不创建新的对象 需要做null判断
+        if (mFrgmtHome == null) mFrgmtHome = HomeFragment.newInstance()
+        if (mFrgmtMine == null) mFrgmtMine = MineFragment.newInstance()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var rootView = inflater!!.inflate(R.layout.fragment_main, container, false)
-        Log.d(TAG, "onCreateView: " + savedInstanceState)
         mNaviBottom = rootView.findViewById<BottomNavigationView>(R.id.navi_bottom)
-        if (savedInstanceState != null) {
-            mCurrentTag = savedInstanceState.getString("CurrentTag")
-            Log.d(TAG, "$mCurrentTag Restored")
-            childFragmentManager.beginTransaction()
-                    .add(R.id.main_content, mFrgmtMine, MineFragment.TAG)
-                    .add(R.id.main_content, mFrgmtHome, HomeFragment.TAG)
-                    .commitNow()
-
-
-            showFragment(childFragmentManager.findFragmentByTag(mCurrentTag), mCurrentTag!!, mFrgmtHome!!, mFrgmtMine!!)
-        } else {
-            showFragment(mFrgmtHome!!,HomeFragment.TAG, mFrgmtMine!!)
-        }
-
         mNaviBottom!!.setOnNavigationItemSelectedListener(this)
+
+        var selectedId = R.id.navigation_home
+        if (savedInstanceState != null) {
+            selectedId = savedInstanceState.getInt("SelectedId")
+            Log.d(TAG, "${getTagById(selectedId)} restored")
+        }
+        mNaviBottom!!.selectedItemId = selectedId
+        Log.d(TAG, "onCreateView: Selected " + getTagById(mNaviBottom!!.selectedItemId) + " " + childFragmentManager.fragments.size + " " + savedInstanceState)
         return rootView
-    }
-
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        Log.d(TAG, "onActivityCreated: " + savedInstanceState)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume")
-    }
-
-    override fun onPause() {
-        Log.d(TAG, "onPause")
-        super.onPause()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        Log.d(TAG, "onSaveInstanceState")
-        outState.putString("CurrentTag", mCurrentTag)
-        Log.d(TAG, "$mCurrentTag Saved")
-    }
-
-    override fun onStop() {
-        Log.d(TAG, "onStop")
-        super.onStop()
-    }
-
-    override fun onDestroyView() {
-        Log.d(TAG, "onDestroyView")
-        super.onDestroyView()
-    }
-
-    override fun onDestroy() {
-        Log.d(TAG, "onDestroy")
-        super.onDestroy()
-    }
-
-    override fun onDetach() {
-        Log.d(TAG, "onDetach")
-        super.onDetach()
+        outState.putInt("SelectedId", mNaviBottom!!.selectedItemId)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navigation_home -> {
-                return showFragment(mFrgmtHome!!, HomeFragment.TAG, mFrgmtMine!!)
+                return showFragment(mFrgmtHome!!, mFrgmtMine!!)
             }
             R.id.navigation_find -> {
-                return true
+                return false
             }
             R.id.navigation_mine -> {
-                return showFragment(mFrgmtMine!!, MineFragment.TAG, mFrgmtHome!!)
+                return showFragment(mFrgmtMine!!, mFrgmtHome!!)
             }
         }
+        Log.d(TAG, "onNavigationItemSelected: ${getTagById(item.itemId)}")
         return false
     }
 
-    fun showFragment(fragment: Fragment, tag : String, vararg hides: Fragment): Boolean {
-        if (fragment!!.isVisible) return false
+    fun showFragment(fragment: Fragment, vararg hides: Fragment): Boolean {
+        if (fragment.isVisible) return false
 
         val trans = childFragmentManager.beginTransaction()
-        if (!fragment!!.isAdded) {
-            trans.add(R.id.main_content, fragment, tag)
+        if (!fragment.isAdded) {
+            trans.add(R.id.main_content, fragment)
         }
-        for (f in hides) trans.hide(f)
+        for (f in hides) if (f?.isAdded) trans.hide(f)
         trans.show(fragment).commit()
-        mCurrentTag = fragment.tag
-        Log.d(TAG, "Commint $fragment")
+        Log.d(TAG, "current showing $fragment")
         return true
+    }
+
+    fun getTagById(id: Int): String? {
+        when (id) {
+            R.id.navigation_home -> {
+                return HomeFragment.TAG
+            }
+            R.id.navigation_find -> {
+                return "FindFragment"
+            }
+            R.id.navigation_mine -> {
+                return MineFragment.TAG
+            }
+            else -> {
+                return null
+            }
+        }
     }
 
 }
