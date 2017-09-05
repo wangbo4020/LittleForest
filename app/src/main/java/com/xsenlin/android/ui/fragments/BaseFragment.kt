@@ -20,7 +20,7 @@ open class BaseFragment : Fragment() {
         mLifecycleLogDelegate = LifecycleLogDelegate("BaseFragment")
     }
 
-    protected fun setUpLifecycleLog(enable : Boolean, tag: String) {
+    protected fun setupLifecycleLog(enable : Boolean, tag: String) {
         mLifecycleLogDelegate.logTag = tag
         mLifecycleLogDelegate.lifecycleLog = enable
     }

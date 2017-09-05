@@ -31,3 +31,13 @@
 -dontwarn retrofit2.Platform$Java8
 -keepattributes Signature, Exceptions
 # retrofit end
+
+# picasso start
+-dontwarn com.squareup.okhttp.**
+# picasso end
+
+# internal start
+-keepclassmembers class android.support.design.internal.BottomNavigationMenuView {
+    boolean mShiftingMode;
+}
+# internal end

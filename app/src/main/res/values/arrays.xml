@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gift_category">
+        <item>首页</item>
+        <item>爱情树</item>
+        <item>许愿树</item>
+        <item>友谊树</item>
+        <item>祝福树</item>
+        <item>生日树</item>
+        <item>祈福树</item>
+        <item>结婚树</item>
+    </string-array>
+</resources>
