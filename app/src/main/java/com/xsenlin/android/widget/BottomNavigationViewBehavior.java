@@ -1,4 +1,4 @@
-package com.xsenlin.android.ui;
+package com.xsenlin.android.widget;
 
 import android.content.Context;
 import android.support.design.widget.AppBarLayout;
