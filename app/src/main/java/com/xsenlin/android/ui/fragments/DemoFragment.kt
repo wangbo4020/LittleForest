@@ -27,7 +27,7 @@ open class DemoFragment : BaseFragment() {
 
     var mTextView : TextView? = null
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var rootView = inflater!!.inflate(R.layout.fragment_demo, container, false)
+        val rootView = inflater!!.inflate(R.layout.fragment_demo, container, false)
         mTextView = rootView.findViewById(android.R.id.text1)
         if (null != arguments) {
             mTextView!!.setText(arguments.getString(KEY_TEXT))

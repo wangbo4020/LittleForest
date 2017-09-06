@@ -34,7 +34,7 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var rootView = inflater!!.inflate(R.layout.fragment_home, container, false)
+        val rootView = inflater!!.inflate(R.layout.fragment_home, container, false)
 
         val toolbar = rootView.findViewById<Toolbar>(R.id.toolbar)
         (activity as BaseActivity).setSupportActionBar(toolbar)

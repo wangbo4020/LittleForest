@@ -48,18 +48,17 @@ class MainFragment : BaseFragment(), BottomNavigationView.OnNavigationItemSelect
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 如果Fragment被现场恢复，将不创建新的对象 需要做null判断
-        if (mFrgmtHome == null) mFrgmtHome = HomeFragment.newInstance()
-        if (mFrgmtSafe == null) mFrgmtSafe = SafeFragment.newInstance()
-        if (mFrgmtTime == null) mFrgmtTime = TimeFragment.newInstance()
-        if (mFrgmtMine == null) mFrgmtMine = MineFragment.newInstance()
+        // 如果Fragment未被现场恢复，创建新的实例 需要做null判断
+        mFrgmtHome = mFrgmtHome ?: HomeFragment.newInstance()
+        mFrgmtSafe = mFrgmtSafe ?: SafeFragment.newInstance()
+        mFrgmtTime = mFrgmtTime ?: TimeFragment.newInstance()
+        mFrgmtMine = mFrgmtMine ?: MineFragment.newInstance()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var rootView = inflater!!.inflate(R.layout.fragment_main, container, false)
+        val rootView = inflater!!.inflate(R.layout.fragment_main, container, false)
 
         val toolbar = rootView.findViewById<Toolbar>(R.id.toolbar)
         (activity as BaseActivity).setSupportActionBar(toolbar)

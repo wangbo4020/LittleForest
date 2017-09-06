@@ -22,7 +22,7 @@ class MineFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var rootView = inflater!!.inflate(R.layout.fragment_mine, container, false)
+        val rootView = inflater!!.inflate(R.layout.fragment_mine, container, false)
         return rootView
     }
 
