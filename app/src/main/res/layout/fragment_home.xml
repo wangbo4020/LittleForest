@@ -8,23 +8,6 @@
     android:orientation="vertical"
     tools:context="com.xsenlin.android.ui.fragments.HomeFragment"
     tools:showIn="@layout/fragment_main">
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="2"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="@string/home_tabs_more"
-            android:textAppearance="@style/TextAppearance.Design.Tab" />
-    </LinearLayout>-->
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -38,11 +21,29 @@
             app:layout_scrollFlags="scroll|snap"
             app:popupTheme="?attr/actionBarPopupTheme"/>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tablayout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="scrollable"/>
+            android:orientation="horizontal">
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tablayout"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:tabMode="scrollable"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="2"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/home_tabs_more"
+                android:textAppearance="@style/TextAppearance.Design.Tab" />
+        </LinearLayout>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
