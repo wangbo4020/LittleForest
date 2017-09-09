@@ -33,7 +33,7 @@ class MainFragment : BaseFragment(), BottomNavigationView.OnNavigationItemSelect
     private var mFrgmtMine: Fragment? = null
 
     init {
-        setupLifecycleLog(true, TAG)
+//        setupLifecycleLog(true, TAG)
     }
 
     override fun onAttachFragment(childFragment: Fragment?) {

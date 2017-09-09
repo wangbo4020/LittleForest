@@ -20,7 +20,7 @@ class MainActivity : BaseActivity() {
     }
 
     init {
-        setUpLifecycleLog(true, TAG)
+//        setUpLifecycleLog(true, TAG)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
