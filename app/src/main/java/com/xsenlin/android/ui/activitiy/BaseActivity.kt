@@ -1,4 +1,4 @@
-package com.xsenlin.android.ui.activities
+package com.xsenlin.android.ui.activitiy
 
 import android.content.Intent
 import android.content.res.Configuration

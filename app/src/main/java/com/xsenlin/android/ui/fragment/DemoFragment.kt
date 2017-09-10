@@ -1,4 +1,4 @@
-package com.xsenlin.android.ui.fragments
+package com.xsenlin.android.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

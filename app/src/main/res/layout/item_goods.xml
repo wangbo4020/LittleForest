@@ -1,7 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
 
-</android.support.constraint.ConstraintLayout>
+    <data>
+
+        <variable
+            name="columns"
+            type="int" />
+
+        <variable
+            name="horizontalStart"
+            type="boolean" />
+
+        <variable
+            name="horizontalEnd"
+            type="boolean" />
+
+        <variable
+            name="goods"
+            type="com.xsenlin.android.ui.model.GoodsSimple" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_primary"
+        android:paddingBottom="@dimen/first_item_goods_space_vertical">
+
+        <ImageView
+            android:id="@+id/iv_goods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_first_item_goods"
+            android:scaleType="fitCenter"
+            android:src="@{goods.imageUrl}"
+            app:layout_constraintHorizontal_bias="@{horizontalStart ? 0f : horizontalEnd ? 1f : 0.5f}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:layout_columns="@{columns}"
+            bind:layout_horizontalEnd="@{horizontalEnd}"
+            bind:layout_horizontalStart="@{horizontalStart}"
+            bind:layout_marginExternal="@{@dimen/margin_primary}"
+            bind:layout_marginInternal="@{@dimen/space_primary}" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/iv_goods"
+            android:layout_alignRight="@+id/iv_goods"
+            android:layout_below="@+id/iv_goods"
+            android:layout_marginTop="@dimen/space_primary"
+            android:text="@{goods.name, default=@string/dummy_item_goods_name}"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_goods"
+            app:layout_constraintRight_toRightOf="@+id/iv_goods"
+            app:layout_constraintTop_toBottomOf="@+id/iv_goods" />
+
+        <TextView
+            android:id="@+id/tv_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_name"
+            android:layout_alignRight="@+id/iv_goods"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginTop="@dimen/space_primary"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{goods.label, default=@string/dummy_item_goods_label}"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_name"
+            app:layout_constraintRight_toRightOf="@+id/iv_goods"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

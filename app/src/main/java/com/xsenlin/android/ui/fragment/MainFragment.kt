@@ -1,8 +1,6 @@
-package com.xsenlin.android.ui.fragments
+package com.xsenlin.android.ui.fragment
 
 import android.os.Bundle
-import android.support.design.internal.BottomNavigationItemView
-import android.support.design.internal.BottomNavigationMenuView
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
@@ -13,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.xsenlin.android.R
 import com.xsenlin.android.ui.BottomNavigationViewHelper
-import com.xsenlin.android.ui.activities.BaseActivity
+import com.xsenlin.android.ui.activitiy.BaseActivity
 
 
 /**

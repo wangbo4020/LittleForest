@@ -8,4 +8,7 @@
     <color name="color_primary">#61ce8f</color>
     <color name="color_primary_dark">#61ce8f</color>
     <color name="color_accent">@android:color/white</color>
+
+    <color name="window_background_primary">#f3f4f5</color>
+    <color name="background_primary">@color/color_accent</color>
 </resources>

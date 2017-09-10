@@ -13,6 +13,14 @@
 
     <string name="home_tabs_more">@string/more</string>
 
+    <string name="first_activity_title">限时活动</string>
+    <string name="first_story_title">礼物故事</string>
+    <string name="first_goods_title">精品礼物</string>
+
+    <string name="dummy_item_title_label">未知</string>
+    <string name="dummy_item_goods_name">未知</string>
+    <string name="dummy_item_goods_label">我是一棵未知的树</string>
+
     <string name="bottom_naviagion_scrolling_view_behavior">com.xsenlin.android.ui.BottomNavigationViewBehavior</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"

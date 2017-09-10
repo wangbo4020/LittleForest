@@ -1,0 +1,5 @@
+ViewModel
+
+Simple		后缀为简单信息
+Info		后缀为一个完整信息
+Group		后缀为多Info组合

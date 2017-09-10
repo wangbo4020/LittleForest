@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 26
@@ -35,6 +36,9 @@ android {
         enabled = true
     }
 }
+kapt {
+    generateStubs = true
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -44,13 +48,25 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    //--调试诊断工具--
+//    debugCompile 'com.github.markzhai:blockcanary-android:1.4.0'
+//    releaseCompile 'com.github.markzhai:blockcanary-no-op:1.4.0'
+//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
+//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4'
+    compile 'com.github.markzhai:blockcanary-no-op:1.4.0'
+    compile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4'
+
     // for support
+    kapt "com.android.databinding:compiler:2.+"
     compile 'com.android.support:design:26.+'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:recyclerview-v7:26.+'
     compile 'com.android.support:support-vector-drawable:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    // for google
+//    compile 'com.google.firebase:firebase-crash:11.2.0'
 
     // for third
     compile 'io.reactivex.rxjava2:rxjava:2.+'

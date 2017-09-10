@@ -1,4 +1,4 @@
-package com.xsenlin.android.ui.fragments
+package com.xsenlin.android.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -8,9 +8,11 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.*
 import com.xsenlin.android.R
-import com.xsenlin.android.ui.activities.BaseActivity
+import com.xsenlin.android.ui.activitiy.BaseActivity
+import com.xsenlin.android.ui.model.ActivitySimple.ActivitySimpleList
 
 /**
  * Created by Dylan on 2017/8/31.
@@ -44,6 +46,7 @@ class HomeFragment : BaseFragment() {
 
         mViewPager!!.adapter = HomePagerAdapter(context, childFragmentManager)
         mTabLayout!!.setupWithViewPager(mViewPager)
+        Log.d(TAG, "label -> " + (ActivitySimpleList(context.resources).label))
 
         if (savedInstanceState != null) {
             var currentItem = savedInstanceState.getInt("CurrentItem")
@@ -84,7 +87,6 @@ class HomeFragment : BaseFragment() {
         override fun getItem(position: Int): Fragment {
 
             if (position == 0) return FirstFragment.newInstance()
-
             val text : CharSequence = when {
                 position == 0 -> context.getString(R.string.large_text)
                 position < mCategoryGift.size -> mCategoryGift[position]

@@ -1,3 +1,17 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="first_item_label_space_vertical">15dp</dimen>
+    <dimen name="first_item_banner_height">203dp</dimen>
+    <dimen name="first_item_activity_width">166dp</dimen>
+    <dimen name="first_item_activity_height">75dp</dimen>
+    <dimen name="first_item_activity_space_vertical">@dimen/margin_primary</dimen>
+    <dimen name="first_item_activity_space_horizontal">@dimen/margin_primary</dimen>
+    <dimen name="first_item_goods_round">166dp</dimen>
+    <dimen name="first_item_goods_space_vertical">@dimen/margin_primary</dimen>
+
+    <dimen name="space_primary">8dp</dimen>
+    <dimen name="margin_primary">10dp</dimen>
+    <dimen name="space_horizontal">0dp</dimen>
+
+    <dimen name="divider_thick">8dp</dimen>
 </resources>
