@@ -3,21 +3,25 @@
 
     <data>
 
+        <import type="com.xsenlin.android.ui.AppBindingAdapter" alias="Transforms" />
+
         <variable
             name="banner"
             type="com.xsenlin.android.ui.model.BannerInfo" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/image"
-            android:src="@{banner.imageUrl}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerInside" />
+            android:scaleType="centerInside"
+            android:src="@{banner.imageUrl}"
+            bind:transform="@{Transforms.TRANSFORM_BASIS_SCALE}" />
     </FrameLayout>
 
 </layout>

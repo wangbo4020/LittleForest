@@ -3,6 +3,10 @@
 
     <data>
 
+        <import
+            alias="Transforms"
+            type="com.xsenlin.android.ui.AppBindingAdapter" />
+
         <variable
             name="columns"
             type="int" />
@@ -33,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_first_item_goods"
+            android:padding="0dp"
             android:scaleType="fitCenter"
             android:src="@{goods.imageUrl}"
             app:layout_constraintHorizontal_bias="@{horizontalStart ? 0f : horizontalEnd ? 1f : 0.5f}"
@@ -43,7 +48,8 @@
             bind:layout_horizontalEnd="@{horizontalEnd}"
             bind:layout_horizontalStart="@{horizontalStart}"
             bind:layout_marginExternal="@{@dimen/margin_primary}"
-            bind:layout_marginInternal="@{@dimen/space_primary}" />
+            bind:layout_marginInternal="@{@dimen/space_primary}"
+            bind:transform="@{Transforms.TRANSFORM_BASIS_SCALE}" />
 
         <TextView
             android:id="@+id/tv_name"

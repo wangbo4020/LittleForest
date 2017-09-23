@@ -12,6 +12,12 @@ class BasisScaleTransformation(private val key: String, private val targetSize: 
 
     private var basis: Int? = BASIS_WIDTH
 
+    init {
+        if (targetSize <= 0) {
+            throw IllegalArgumentException("targetSize must be > 0")
+        }
+    }
+
     constructor(key: String, targetSize: Int, basis: Int) : this(key, targetSize) {
         this.basis = basis
     }

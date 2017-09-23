@@ -18,6 +18,7 @@
     <string name="first_goods_title">精品礼物</string>
 
     <string name="dummy_item_title_label">未知</string>
+    <string name="dummy_item_story_label">未知</string>
     <string name="dummy_item_goods_name">未知</string>
     <string name="dummy_item_goods_label">我是一棵未知的树</string>
 

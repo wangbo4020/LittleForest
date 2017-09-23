@@ -2,6 +2,7 @@ package com.xsenlin.android.ui.model
 
 import android.content.res.Resources
 import android.util.SparseArray
+import com.xsenlin.android.ui.AppBindingAdapter
 import com.xsenlin.android.ui.model.ActivitySimple.ActivitySimpleList
 import com.xsenlin.android.ui.model.BannerInfo.BannerInfoList
 import com.xsenlin.android.ui.model.GoodsSimple.GoodsSimpleList
@@ -15,11 +16,12 @@ class HomeFirstGroup(var columns: Int, res: Resources) {
 
     companion object {
 
-        val TYPE_BANNER = 0
+        val TYPE_HEADER = 0
         val TYPE_TITLE = 1
-        val TYPE_ACTIVITIES = 2
-        val TYPE_STORIES = 3
+        val TYPE_ACTIVITY = 2//
+        val TYPE_STORIES = 3 // story因为是独立列表，下方做了特殊处理
         val TYPE_GOODS = 4
+        val TYPE_FOOTER = 5
 
         fun createExapme(columns: Int, res: Resources): HomeFirstGroup {
             val data = HomeFirstGroup(columns, res)
@@ -29,6 +31,11 @@ class HomeFirstGroup(var columns: Int, res: Resources) {
 
             data.activities.add(ActivitySimple(1, 0, null, "file:///android_asset/demo/activity_0.png"))
             data.activities.add(ActivitySimple(2, 0, null, "file:///android_asset/demo/activity_1.png"))
+
+            data.stories.add(StorySimple(1, "爱情树的故事", "file:///android_asset/demo/story_0.png"))
+            data.stories.add(StorySimple(2, "生日树的故事", "file:///android_asset/demo/story_1.png"))
+            data.stories.add(StorySimple(3, "许愿树的故事", "file:///android_asset/demo/story_2.png"))
+            data.stories.add(StorySimple(4, "友情树的故事", "file:///android_asset/demo/story_3.png"))
 
             data.goods.add(GoodsSimple(1, "红枫", "散播祝福，友谊长青", "file:///android_asset/demo/goods_0.png"))
             data.goods.add(GoodsSimple(2, "樱花", "这个季节和樱花最配哦", "file:///android_asset/demo/goods_1.png"))
@@ -94,9 +101,9 @@ class HomeFirstGroup(var columns: Int, res: Resources) {
         val mark = calcPosition(bKey, aTitleKey, aStartKey, aEndKey, sTitleKey, sStartKey, sEndKey, gTitleKey, gStartKey, gEndKey)
 
         return when (position) {
-            mark[bKey] -> TYPE_BANNER
+            mark[bKey] -> TYPE_HEADER
             mark[aTitleKey] -> TYPE_TITLE
-            in mark[aStartKey]..mark[aEndKey] -> TYPE_ACTIVITIES
+            in mark[aStartKey]..mark[aEndKey] -> TYPE_ACTIVITY
             mark[sTitleKey] -> TYPE_TITLE
             in mark[sStartKey]..mark[sEndKey] -> TYPE_STORIES
             mark[gTitleKey] -> TYPE_TITLE
@@ -123,11 +130,30 @@ class HomeFirstGroup(var columns: Int, res: Resources) {
             mark[aTitleKey] -> activities
             in mark[aStartKey]..mark[aEndKey] -> activities.get(position - mark[aStartKey])
             mark[sTitleKey] -> stories
-            in mark[sStartKey]..mark[sEndKey] -> stories.get(position - mark[sStartKey])
+            in mark[sStartKey]..mark[sEndKey] -> stories/*.get(position - mark[sStartKey])*/
             mark[gTitleKey] -> goods
             in mark[gStartKey]..mark[gEndKey] -> goods.get(position - mark[gStartKey])
             else -> throw NullPointerException("Not found the object $position")
         } as T
+    }
+
+    fun getActualCountByType(type: Int): Int {
+        return when (type) {
+            HomeFirstGroup.TYPE_HEADER -> if (banners.count > 0) 1 else 0
+            HomeFirstGroup.TYPE_TITLE -> {
+                var count = 0
+                // has title
+                if (activities.count > 0) count++
+                if (stories.count > 0) count++
+                if (goods.count > 0) count++
+                count
+            }
+            HomeFirstGroup.TYPE_ACTIVITY -> activities.count
+            HomeFirstGroup.TYPE_STORIES -> if (stories.count > 0) 1 else 0
+            HomeFirstGroup.TYPE_GOODS -> goods.count
+//            HomeFirstGroup.TYPE_FOOTER -> 0
+            else -> 0
+        }
     }
 
     fun getTotalCount(): Int {
@@ -142,7 +168,7 @@ class HomeFirstGroup(var columns: Int, res: Resources) {
         }
         if (stories.count > 0) {
             if (stories is TitleLabel) count++
-            count += stories.count
+            count++// stories.count
         }
         if (goods.count > 0) {
             if (goods is TitleLabel) count++
@@ -159,7 +185,7 @@ class HomeFirstGroup(var columns: Int, res: Resources) {
 
         val bCount = banners.count
         val aCount = activities.count
-        val sCount = stories.count
+        val sCount = if (stories.count > 0) 1 else 0// story 是独立列表，特殊处理
         val gCount = goods.count
 
         val hasBanner = bCount > 0

@@ -37,7 +37,7 @@
 # picasso end
 
 # internal start
--keep class com.xsenlin.android.ui.BindingAdapter {*;}
+-keep class com.xsenlin.android.ui.AppBindingAdapter {*;}
 -keepclassmembers class android.support.design.internal.BottomNavigationMenuView {
     boolean mShiftingMode;
 }

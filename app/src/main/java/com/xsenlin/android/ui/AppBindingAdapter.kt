@@ -15,10 +15,13 @@ import com.xsenlin.android.widget.BasisScaleTransformation
  * Created by Dylan on 2017/9/10.
  */
 
-object BindingAdapter {
+object AppBindingAdapter {
 
     val printLog = false
-    val TAG = "BindingAdapter"
+    val TAG = "AppBindingAdapter"
+
+    @JvmStatic
+    val TRANSFORM_BASIS_SCALE = 1
 
     @JvmStatic
     @BindingAdapter("android:layout_marginLeft")
@@ -107,7 +110,19 @@ object BindingAdapter {
     @BindingAdapter("android:src")
     fun setImageUrl(view: ImageView, url: String) {
         if (printLog) Log.d(TAG, "setImageUrl " + url + " " + view.width + " " + view.measuredWidth + " " + url)
-        Picasso.with(view.context).load(url).transform(BasisScaleTransformation(url, view.width)).into(view)
+        Picasso.with(view.context).load(url).into(view)
+    }
+
+    @JvmStatic
+    @BindingAdapter("android:src", "bind:transform")
+    fun setImageUrlTransform(view: ImageView, url: String, trans: Int) {
+        if (printLog) Log.d(TAG, "setImageUrlTransform " + trans + " " + url + " " + view.width + " " + view.measuredWidth + " " + url)
+
+        val creator = Picasso.with(view.context).load(url)
+        when (trans) {
+            TRANSFORM_BASIS_SCALE -> creator.transform(BasisScaleTransformation(url, view.width))
+        }
+        creator.into(view)
     }
 
     @JvmStatic

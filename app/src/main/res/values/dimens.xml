@@ -6,6 +6,10 @@
     <dimen name="first_item_activity_height">75dp</dimen>
     <dimen name="first_item_activity_space_vertical">@dimen/margin_primary</dimen>
     <dimen name="first_item_activity_space_horizontal">@dimen/margin_primary</dimen>
+
+    <dimen name="item_story_actual_cover_width">100dp</dimen>
+    <dimen name="item_story_actual_cover_height">150dp</dimen>
+
     <dimen name="first_item_goods_round">166dp</dimen>
     <dimen name="first_item_goods_space_vertical">@dimen/margin_primary</dimen>
 
