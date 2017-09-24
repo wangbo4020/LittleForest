@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="space_primary">9dp</dimen>
-    <dimen name="margin_primary">11dp</dimen>
+    <dimen name="space_primary">9.15dp</dimen>
+    <dimen name="margin_primary">11.15dp</dimen>
 
-    <dimen name="divider_thick">9dp</dimen>
+    <dimen name="divider_thick">9.1dp</dimen>
 
     <dimen name="item_label_space_vertical">17dp</dimen>
 
