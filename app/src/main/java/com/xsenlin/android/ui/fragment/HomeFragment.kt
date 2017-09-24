@@ -86,6 +86,7 @@ class HomeFragment : BaseFragment() {
         override fun getItem(position: Int): Fragment {
 
             if (position == 0) return FirstFragment.newInstance()
+            else if (position == 1) return SecondFragment.newInstance()
             val text : CharSequence = when {
                 position == 0 -> context.getString(R.string.large_text)
                 position < mCategoryGift.size -> mCategoryGift[position]

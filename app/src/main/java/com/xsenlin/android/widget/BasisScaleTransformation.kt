@@ -16,6 +16,7 @@ class BasisScaleTransformation(private val key: String, private val targetSize: 
         if (targetSize <= 0) {
             throw IllegalArgumentException("targetSize must be > 0")
         }
+//        android.util.Log.d(TAG, "key ${key()}")
     }
 
     constructor(key: String, targetSize: Int, basis: Int) : this(key, targetSize) {
@@ -48,7 +49,7 @@ class BasisScaleTransformation(private val key: String, private val targetSize: 
         if (source != output && !source.isRecycled) {
             source.recycle()
         }
-//        Log.d(TAG, "output " + output.width + "x" + output.height + " ratio " + ratio)
+//        android.util.Log.d(TAG, "${Thread.currentThread().name} output " + output.width + "x" + output.height + " ratio " + ratio + " key ${key()}")
         return output
     }
 

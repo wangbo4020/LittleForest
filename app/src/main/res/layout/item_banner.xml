@@ -31,8 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="@dimen/item_banner_height"
-            android:scaleType="fitCenter"
             android:src="@{banners.bannerImageUrls[0]}"
+            bind:loading="@{@drawable/img_dummy_loading}"
             bind:transform="@{Transforms.TRANSFORM_BASIS_SCALE}" />
     </FrameLayout>
 </layout>

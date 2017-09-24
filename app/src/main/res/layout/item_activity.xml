@@ -23,8 +23,8 @@
             android:layout_width="@dimen/item_activity_width"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_first_item_activity"
-            android:scaleType="fitCenter"
             android:src="@{activity.coverUrl}"
+            bind:loading="@{@drawable/img_dummy_loading}"
             bind:transform="@{Transforms.TRANSFORM_BASIS_SCALE}" />
 
     </FrameLayout>

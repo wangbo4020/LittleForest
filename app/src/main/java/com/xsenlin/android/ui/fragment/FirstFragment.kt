@@ -60,16 +60,19 @@ class FirstFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         mLayoutManger.spanSizeLookup = HomeFirstSpanSizeLookup(mData)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.fragment_first, container, false)
-        mSwipeRefresh = rootView.findViewById(R.id.swipe_refresh_widget)
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return inflater!!.inflate(R.layout.fragment_first, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mSwipeRefresh = view.findViewById(R.id.swipe_refresh_widget)
         mSwipeRefresh!!.setOnRefreshListener(this)
 
-        mScrolling = rootView.findViewById(R.id.recycler_view)
+        mScrolling = view.findViewById(R.id.recycler_view)
         mScrolling!!.addItemDecoration(mDecoration)
         mScrolling!!.adapter = mAdapter
         mScrolling!!.layoutManager = mLayoutManger
-        return rootView
     }
 
     override fun onDestroyView() {

@@ -15,6 +15,7 @@
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/background_primary">
@@ -23,13 +24,15 @@
             android:id="@+id/iv_cover"
             android:layout_width="@dimen/item_story_actual_cover_width"
             android:layout_height="@dimen/item_story_actual_cover_height"
-            android:scaleType="fitCenter"
             android:src="@{story.coverUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:transform="@{Transforms.TRANSFORM_BASIS_SCALE}" />
+            bind:loading="@{@drawable/img_dummy_loading}"
+            bind:transform="@{Transforms.TRANSFORM_BASIS_SCALE}"
+            tools:background="@color/window_background_primary"
+            tools:src="@drawable/img_dummy_loading" />
 
         <TextView
             android:layout_width="0dp"

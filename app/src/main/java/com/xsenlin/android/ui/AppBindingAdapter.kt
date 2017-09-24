@@ -1,6 +1,7 @@
 package com.xsenlin.android.ui
 
 import android.databinding.BindingAdapter
+import android.graphics.drawable.Drawable
 import android.support.constraint.ConstraintLayout
 import android.support.v4.view.MarginLayoutParamsCompat
 import android.support.v4.view.ViewCompat
@@ -107,21 +108,22 @@ object AppBindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("android:src")
-    fun setImageUrl(view: ImageView, url: String) {
-        if (printLog) Log.d(TAG, "setImageUrl " + url + " " + view.width + " " + view.measuredWidth + " " + url)
-        Picasso.with(view.context).load(url).into(view)
-    }
+    @BindingAdapter("android:src", "bind:transform", "bind:loading", "bind:error", requireAll = false)
+    fun setImageUrl(view: ImageView, url: String, trans: Int, loading: Drawable?, error: Drawable?) {
+        /*if (printLog)*/ Log.d(TAG, "setImageUrl trans " + trans + " loading $loading url " + url + " " + view.width + " " + view.measuredWidth + " " + url)
 
-    @JvmStatic
-    @BindingAdapter("android:src", "bind:transform")
-    fun setImageUrlTransform(view: ImageView, url: String, trans: Int) {
-        if (printLog) Log.d(TAG, "setImageUrlTransform " + trans + " " + url + " " + view.width + " " + view.measuredWidth + " " + url)
-
-        val targetSize = view.width
         val creator = Picasso.with(view.context).load(url)
         when (trans) {
-            TRANSFORM_BASIS_SCALE -> if (targetSize > 0) creator.transform(BasisScaleTransformation(url, targetSize))
+            TRANSFORM_BASIS_SCALE -> {
+                val targetSize = view.width
+                if (targetSize > 0) creator.transform(BasisScaleTransformation(url, targetSize))
+            }
+        }
+        if (loading != null) {
+            creator.placeholder(loading)
+        }
+        if (error != null) {
+            creator.error(error)
         }
         creator.into(view)
     }

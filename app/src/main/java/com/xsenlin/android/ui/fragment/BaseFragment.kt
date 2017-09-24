@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.xsenlin.android.ui.ContentLoadingDelegate
 import com.xsenlin.android.ui.LifecycleLogDelegate
 
 /**
@@ -14,16 +15,27 @@ import com.xsenlin.android.ui.LifecycleLogDelegate
  */
 open class BaseFragment : Fragment() {
 
-    protected val mLifecycleLogDelegate: LifecycleLogDelegate
+    protected val mLifecycleLogDelegate: LifecycleLogDelegate by lazy { LifecycleLogDelegate("BaseFragment") }
+    protected val mContentLoadingDelegate: ContentLoadingDelegate by lazy { ContentLoadingDelegate() }
 
-    init {
-        mLifecycleLogDelegate = LifecycleLogDelegate("BaseFragment")
-    }
-
-    protected fun setupLifecycleLog(enable : Boolean, tag: String) {
+    protected fun setupLifecycleLog(enable: Boolean, tag: String) {
         mLifecycleLogDelegate.logTag = tag
         mLifecycleLogDelegate.lifecycleLog = enable
     }
+
+    /* - - - - - - - - - - - - - - - ContentLoadingDelegate Start - - - - - - - - - - - - - - - - */
+    protected fun setupContentLoading(view: View) {
+        mContentLoadingDelegate.setup(view)
+    }
+
+    protected fun showContentLoading() {
+        mContentLoadingDelegate.show()
+    }
+
+    protected fun hideContentLoading() {
+        mContentLoadingDelegate.hide()
+    }
+    /* * * * * * * * * * * * * * * * * ContentLoadingDelegate End * * * * * * * * * * * * * * * * */
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)

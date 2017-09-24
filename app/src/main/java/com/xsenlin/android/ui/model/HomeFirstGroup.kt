@@ -1,6 +1,7 @@
 package com.xsenlin.android.ui.model
 
 import android.content.res.Resources
+import android.util.Log
 import android.util.SparseArray
 import com.xsenlin.android.ui.model.ActivitySimple.ActivitySimpleList
 import com.xsenlin.android.ui.model.BannerInfo.BannerInfoList
@@ -18,7 +19,7 @@ class HomeFirstGroup(var columns: Int, res: Resources) {
         val TYPE_DEFAULT = 0
         val TYPE_HEADER = 1
         val TYPE_TITLE = 2
-        val TYPE_ACTIVITY = 3//
+        val TYPE_ACTIVITY = 3
         val TYPE_STORIES = 4 // story因为是独立列表，下方做了特殊处理
         val TYPE_GOODS = 5
         val TYPE_FOOTER = 6
@@ -75,6 +76,8 @@ class HomeFirstGroup(var columns: Int, res: Resources) {
     val goods: GoodsSimpleList by lazy {
         GoodsSimpleList(res)
     }
+
+    private val array: Array<ModelList<out Any>> = arrayOf(banners, activities, stories, goods)
 
     fun getRelativePosition(position: Int): Int {
         val bKey = 0
@@ -158,10 +161,11 @@ class HomeFirstGroup(var columns: Int, res: Resources) {
             HomeFirstGroup.TYPE_HEADER -> wrapCount(banners)
             HomeFirstGroup.TYPE_TITLE -> {
                 var count = 0
-                // has title
-                if (activities.count > 0) count++
-                if (stories.count > 0) count++
-                if (goods.count > 0) count++
+                // count title
+                for (i in array) {
+                    if (i.count <= 0) continue
+                    if (i is TitleLabel) count++
+                }
                 count
             }
             HomeFirstGroup.TYPE_ACTIVITY -> wrapCount(activities)
@@ -174,8 +178,7 @@ class HomeFirstGroup(var columns: Int, res: Resources) {
 
     fun getTotalCount(): Int {
         var count = 0
-        val childs: Array<ModelList<out Any>> = arrayOf(banners, activities, stories, goods)
-        for (i in childs) {
+        for (i in array) {
             if (i.count <= 0) continue
             if (i is TitleLabel) count++
             count += if (i.isIndependent) 1 else i.count
@@ -206,7 +209,7 @@ class HomeFirstGroup(var columns: Int, res: Resources) {
         val gAtom = if (hasGoods) 1 else 0
 
         // 根据when的..表达式为包前包后
-        val bPos = -1 + if (hasBanner) 1 else 0
+        val bPos = (if (hasBanner) 1 else 0) - 1
 
         val aPos = bPos + (if (hasActivity) headSize else 0)
 
@@ -234,10 +237,12 @@ class HomeFirstGroup(var columns: Int, res: Resources) {
         collect.put(gTitleKey, gPos)
         collect.put(gStartKey, gStart)
         collect.put(gEndKey, gEnd)
+
+//        Log.d("HomeFirstGroup", "bPos $bPos aPos $aPos aStart $aStart aEnd $aEnd sPos $sPos sStart $sStart sEnd $sEnd gPos $gPos gStart $gStart gEnd $gEnd")
         return collect
     }
 
-    private fun wrapCount(ml: ModelList<out Any>): Int = if (ml.isIndependent) 1 else ml.count
+    private fun wrapCount(ml: ModelList<out Any>): Int = if (ml.isIndependent && ml.count > 0) 1 else ml.count
 
     private fun <D, T : ModelList<out D>> wrapGet(ml: T, position: Int): D = (if (ml.isIndependent) ml else ml.get(position)) as D
 }
