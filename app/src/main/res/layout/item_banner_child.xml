@@ -3,7 +3,9 @@
 
     <data>
 
-        <import type="com.xsenlin.android.ui.AppBindingAdapter" alias="Transforms" />
+        <import
+            alias="Transforms"
+            type="com.xsenlin.android.ui.AppBindingAdapter" />
 
         <variable
             name="banner"

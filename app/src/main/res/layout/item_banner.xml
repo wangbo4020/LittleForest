@@ -23,12 +23,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/background_primary"
+            android:minHeight="@dimen/item_banner_height"
             android:visibility="gone"
             app:canLoop="true" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="@dimen/item_banner_height"
             android:scaleType="fitCenter"
             android:src="@{banners.bannerImageUrls[0]}"
             bind:transform="@{Transforms.TRANSFORM_BASIS_SCALE}" />

@@ -7,6 +7,8 @@ data class StorySimple(val id: Int, var lable: CharSequence, var coverUrl: Strin
 
     class StorySimpleList(res: Resources) : ModelList<StorySimple>(), TitleLabel {
 
+        override val isIndependent: Boolean = true
+
         override var label: CharSequence = res.getString(R.string.first_story_title)
 
     }

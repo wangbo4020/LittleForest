@@ -1,21 +1,24 @@
 <resources>
 
-    <dimen name="first_item_label_space_vertical">15dp</dimen>
-    <dimen name="first_item_banner_height">203dp</dimen>
-    <dimen name="first_item_activity_width">166dp</dimen>
-    <dimen name="first_item_activity_height">75dp</dimen>
-    <dimen name="first_item_activity_space_vertical">@dimen/margin_primary</dimen>
-    <dimen name="first_item_activity_space_horizontal">@dimen/margin_primary</dimen>
-
-    <dimen name="item_story_actual_cover_width">100dp</dimen>
-    <dimen name="item_story_actual_cover_height">150dp</dimen>
-
-    <dimen name="first_item_goods_round">166dp</dimen>
-    <dimen name="first_item_goods_space_vertical">@dimen/margin_primary</dimen>
-
     <dimen name="space_primary">8dp</dimen>
     <dimen name="margin_primary">10dp</dimen>
     <dimen name="space_horizontal">0dp</dimen>
 
     <dimen name="divider_thick">8dp</dimen>
+
+    <!-- FirstFragment -->
+    <dimen name="first_item_margin_horizontal">@dimen/margin_primary</dimen>
+    <dimen name="first_item_interval_horizontal">@dimen/space_primary</dimen>
+    <dimen name="first_item_margin_vertical">@dimen/margin_primary</dimen>
+    <dimen name="first_item_interval_vertical">@dimen/margin_primary</dimen>
+
+    <dimen name="item_label_space_vertical">15dp</dimen>
+    <dimen name="item_banner_height">203dp</dimen>
+    <dimen name="item_activity_width">166dp</dimen>
+    <dimen name="item_activity_height">75dp</dimen>
+
+    <dimen name="item_story_actual_cover_width">100dp</dimen>
+    <dimen name="item_story_actual_cover_height">150dp</dimen>
+
+    <dimen name="item_goods_cover_round">166dp</dimen>
 </resources>

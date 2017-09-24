@@ -15,6 +15,11 @@ open abstract class ModelList<T> {
     val count: Int
         get() = infos.size()
 
+    /**
+     * 用于标识UI列表的该子列表是否独立
+     */
+    open val isIndependent: Boolean = false
+
     fun get(index: Int): T = infos[index]
 
     fun add(o: T) {

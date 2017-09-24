@@ -118,9 +118,10 @@ object AppBindingAdapter {
     fun setImageUrlTransform(view: ImageView, url: String, trans: Int) {
         if (printLog) Log.d(TAG, "setImageUrlTransform " + trans + " " + url + " " + view.width + " " + view.measuredWidth + " " + url)
 
+        val targetSize = view.width
         val creator = Picasso.with(view.context).load(url)
         when (trans) {
-            TRANSFORM_BASIS_SCALE -> creator.transform(BasisScaleTransformation(url, view.width))
+            TRANSFORM_BASIS_SCALE -> if (targetSize > 0) creator.transform(BasisScaleTransformation(url, targetSize))
         }
         creator.into(view)
     }

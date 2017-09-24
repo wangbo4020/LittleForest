@@ -8,18 +8,6 @@
             type="com.xsenlin.android.ui.AppBindingAdapter" />
 
         <variable
-            name="columns"
-            type="int" />
-
-        <variable
-            name="horizontalStart"
-            type="boolean" />
-
-        <variable
-            name="horizontalEnd"
-            type="boolean" />
-
-        <variable
             name="activity"
             type="com.xsenlin.android.ui.model.ActivitySimple" />
     </data>
@@ -28,21 +16,16 @@
         xmlns:bind="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_primary"
-        android:paddingBottom="@dimen/first_item_activity_space_vertical">
+        android:background="@color/background_primary">
 
         <ImageView
             android:id="@+id/iv_cover"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/item_activity_width"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_first_item_activity"
             android:scaleType="fitCenter"
             android:src="@{activity.coverUrl}"
-            bind:layout_columns="@{columns}"
-            bind:layout_horizontalEnd="@{horizontalEnd}"
-            bind:layout_horizontalStart="@{horizontalStart}"
-            bind:layout_marginExternal="@{@dimen/margin_primary}"
-            bind:layout_marginInternal="@{@dimen/space_primary}"
             bind:transform="@{Transforms.TRANSFORM_BASIS_SCALE}" />
+
     </FrameLayout>
 </layout>

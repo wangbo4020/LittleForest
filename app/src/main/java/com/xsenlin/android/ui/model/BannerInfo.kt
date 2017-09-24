@@ -4,6 +4,8 @@ data class BannerInfo(val id: Int, var type: Int, var summary: CharSequence?, va
 
     class BannerInfoList : ModelList<BannerInfo>() {
 
+        override val isIndependent: Boolean = true
+
         fun getBannerImageUrls(): List<String> {
             val list = ArrayList<String>(size())
             for (i in 0..(size() - 1)) {

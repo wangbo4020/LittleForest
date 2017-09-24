@@ -46,7 +46,6 @@ class HomeFragment : BaseFragment() {
 
         mViewPager!!.adapter = HomePagerAdapter(context, childFragmentManager)
         mTabLayout!!.setupWithViewPager(mViewPager)
-        Log.d(TAG, "label -> " + (ActivitySimpleList(context.resources).label))
 
         if (savedInstanceState != null) {
             var currentItem = savedInstanceState.getInt("CurrentItem")
