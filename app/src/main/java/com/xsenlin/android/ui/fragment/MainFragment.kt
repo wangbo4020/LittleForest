@@ -56,12 +56,16 @@ class MainFragment : BaseFragment(), BottomNavigationView.OnNavigationItemSelect
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.fragment_main, container, false)
+        return inflater!!.inflate(R.layout.fragment_main, container, false)
+    }
 
-        val toolbar = rootView.findViewById<Toolbar>(R.id.toolbar)
-        (activity as BaseActivity).setSupportActionBar(toolbar)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        mNaviBottom = rootView.findViewById<BottomNavigationView>(R.id.navi_bottom)
+//        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+//        setSupportActionBar(toolbar)
+
+        mNaviBottom = view.findViewById<BottomNavigationView>(R.id.navi_bottom)
         mNaviBottom!!.setOnNavigationItemSelectedListener(this)
         BottomNavigationViewHelper.disableShiftMode(mNaviBottom!!)
 
@@ -71,8 +75,7 @@ class MainFragment : BaseFragment(), BottomNavigationView.OnNavigationItemSelect
             Log.d(TAG, "${getTagById(selectedId)} restored")
         }
         mNaviBottom!!.selectedItemId = selectedId
-        Log.d(TAG, "onCreateView: Selected " + getTagById(mNaviBottom!!.selectedItemId) + " " + childFragmentManager.fragments.size + " " + savedInstanceState)
-        return rootView
+        Log.d(TAG, "onViewCreated: Selected " + getTagById(mNaviBottom!!.selectedItemId) + " " + childFragmentManager.fragments.size + " " + savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

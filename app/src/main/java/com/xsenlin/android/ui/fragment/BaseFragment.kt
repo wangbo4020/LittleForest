@@ -3,12 +3,15 @@ package com.xsenlin.android.ui.fragment
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.support.annotation.Nullable
 import android.support.v4.app.Fragment
+import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.xsenlin.android.ui.ContentLoadingDelegate
 import com.xsenlin.android.ui.LifecycleLogDelegate
+import com.xsenlin.android.ui.activitiy.BaseActivity
 
 /**
  * Created by Dylan on 2017/8/31.
@@ -21,6 +24,10 @@ open class BaseFragment : Fragment() {
     protected fun setupLifecycleLog(enable: Boolean, tag: String) {
         mLifecycleLogDelegate.logTag = tag
         mLifecycleLogDelegate.lifecycleLog = enable
+    }
+
+    protected fun setSupportActionBar(@Nullable toolbar: Toolbar) {
+        (activity as BaseActivity).setSupportActionBar(toolbar)
     }
 
     /* - - - - - - - - - - - - - - - ContentLoadingDelegate Start - - - - - - - - - - - - - - - - */

@@ -10,4 +10,9 @@
         <item>祈福树</item>
         <item>结婚树</item>
     </string-array>
+
+    <string-array name="purchase_titles">
+        <item>@string/purchase_gift_title</item>
+        <item>@string/purchase_details_title</item>
+    </string-array>
 </resources>

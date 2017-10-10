@@ -17,6 +17,9 @@
     <string name="first_story_title">礼物故事</string>
     <string name="first_goods_title">精品礼物</string>
 
+    <string name="purchase_gift_title">礼物</string>
+    <string name="purchase_details_title">详情</string>
+
     <string name="dummy_item_title_label">未知</string>
     <string name="dummy_item_story_label">未知</string>
     <string name="dummy_item_goods_name">未知</string>

@@ -110,7 +110,7 @@ object AppBindingAdapter {
     @JvmStatic
     @BindingAdapter("android:src", "bind:transform", "bind:loading", "bind:error", requireAll = false)
     fun setImageUrl(view: ImageView, url: String, trans: Int, loading: Drawable?, error: Drawable?) {
-        /*if (printLog)*/ Log.d(TAG, "setImageUrl trans " + trans + " loading $loading url " + url + " " + view.width + " " + view.measuredWidth + " " + url)
+        if (printLog) Log.d(TAG, "setImageUrl trans " + trans + " loading $loading url " + url + " " + view.width + " " + view.measuredWidth + " " + url)
 
         val creator = Picasso.with(view.context).load(url)
         when (trans) {

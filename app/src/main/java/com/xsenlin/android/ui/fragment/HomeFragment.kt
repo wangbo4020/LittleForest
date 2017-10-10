@@ -36,13 +36,17 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.fragment_home, container, false)
+        return inflater!!.inflate(R.layout.fragment_home, container, false)
+    }
 
-        val toolbar = rootView.findViewById<Toolbar>(R.id.toolbar)
-        (activity as BaseActivity).setSupportActionBar(toolbar)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        mViewPager = rootView.findViewById(R.id.viewpager)
-        mTabLayout = rootView.findViewById(R.id.tablayout)
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        mViewPager = view.findViewById(R.id.viewpager)
+        mTabLayout = view.findViewById(R.id.tablayout)
 
         mViewPager!!.adapter = HomePagerAdapter(context, childFragmentManager)
         mTabLayout!!.setupWithViewPager(mViewPager)
@@ -51,7 +55,6 @@ class HomeFragment : BaseFragment() {
             var currentItem = savedInstanceState.getInt("CurrentItem")
             mViewPager!!.setCurrentItem(currentItem)
         }
-        return rootView
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
