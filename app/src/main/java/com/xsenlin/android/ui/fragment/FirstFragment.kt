@@ -64,12 +64,12 @@ class FirstFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mSwipeRefresh = view.findViewById(R.id.swipe_refresh_widget)
+        mSwipeRefresh = view!!.findViewById(R.id.swipe_refresh_widget)
         mSwipeRefresh!!.setOnRefreshListener(this)
 
-        mScrolling = view.findViewById(R.id.recycler_view)
+        mScrolling = view!!.findViewById(R.id.recycler_view)
         mScrolling!!.addItemDecoration(mDecoration)
         mScrolling!!.adapter = mAdapter
         mScrolling!!.layoutManager = mLayoutManger

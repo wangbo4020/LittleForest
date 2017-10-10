@@ -34,6 +34,10 @@ class LifecycleLogDelegate(var lifecycleLog: Boolean, var logTag: String) {
         if (lifecycleLog) Log.d(logTag, "onCreateView: " + savedInstanceState)
     }
 
+    fun onViewCreated(savedInstanceState: Bundle?) {
+        if (lifecycleLog) Log.d(logTag, "onViewCreated: " + savedInstanceState)
+    }
+
     fun onActivityCreated(savedInstanceState: Bundle?) {
         if (lifecycleLog) Log.d(logTag, "onActivityCreated: " + savedInstanceState)
     }

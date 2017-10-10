@@ -74,6 +74,11 @@ open class BaseFragment : Fragment() {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mLifecycleLogDelegate.onViewCreated(savedInstanceState)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mLifecycleLogDelegate.onActivityCreated(savedInstanceState)
