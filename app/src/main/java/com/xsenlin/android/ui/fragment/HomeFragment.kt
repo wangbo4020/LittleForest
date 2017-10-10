@@ -81,6 +81,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onDestroyView() {
         mViewPager?.adapter = null
+        mTabLayout?.setupWithViewPager(null)
         super.onDestroyView()
     }
 

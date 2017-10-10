@@ -63,6 +63,7 @@ class PurchaseFragment : BaseFragment() {
 
     override fun onDestroyView() {
         mViewPager?.adapter = null
+        mTabLayout?.setupWithViewPager(null)
         super.onDestroyView()
     }
 
