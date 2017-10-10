@@ -29,10 +29,10 @@ class PurchaseFragment : BaseFragment() {
 
     private var mTabLayout: TabLayout? = null
     private var mViewPager: ViewPager? = null
-    private val mPagerAdapter: GoodsPagerAdapter by lazy { GoodsPagerAdapter(context, childFragmentManager) }
+    private val mPagerAdapter: PurchasePagerAdapter by lazy { PurchasePagerAdapter(context, childFragmentManager) }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_purchase, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_purchase, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,9 +49,24 @@ class PurchaseFragment : BaseFragment() {
 
         mViewPager!!.adapter = mPagerAdapter
         mTabLayout!!.setupWithViewPager(mViewPager)
+
+        if (savedInstanceState != null) {
+            var currentItem = savedInstanceState.getInt("CurrentItem")
+            mViewPager!!.setCurrentItem(currentItem)
+        }
     }
 
-    class GoodsPagerAdapter(val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("CurrentItem", mViewPager!!.currentItem)
+    }
+
+    override fun onDestroyView() {
+        mViewPager?.adapter = null
+        super.onDestroyView()
+    }
+
+    class PurchasePagerAdapter(val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         private val mTitles: Array<String> by lazy {
             context.resources.getStringArray(R.array.purchase_titles)

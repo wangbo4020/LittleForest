@@ -28,8 +28,8 @@ class SecondFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     private var mRecyclerView: RecyclerView? = null
     private val mLayoutManager: LayoutManager by lazy { LinearLayoutManager(context) }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater!!.inflate(R.layout.fragment_second, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

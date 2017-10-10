@@ -29,14 +29,15 @@ class HomeFragment : BaseFragment() {
 
     private var mTabLayout: TabLayout? = null
     private var mViewPager: ViewPager? = null
+    private val mPagerAdapter: HomePagerAdapter by lazy { HomePagerAdapter(context, childFragmentManager) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_home, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,7 +49,7 @@ class HomeFragment : BaseFragment() {
         mViewPager = view.findViewById(R.id.viewpager)
         mTabLayout = view.findViewById(R.id.tablayout)
 
-        mViewPager!!.adapter = HomePagerAdapter(context, childFragmentManager)
+        mViewPager!!.adapter = mPagerAdapter
         mTabLayout!!.setupWithViewPager(mViewPager)
 
         if (savedInstanceState != null) {
@@ -76,6 +77,11 @@ class HomeFragment : BaseFragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("CurrentItem", mViewPager!!.currentItem)
+    }
+
+    override fun onDestroyView() {
+        mViewPager?.adapter = null
+        super.onDestroyView()
     }
 
     class HomePagerAdapter(val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
