@@ -20,6 +20,11 @@
     <string name="purchase_gift_title">礼物</string>
     <string name="purchase_details_title">详情</string>
 
+    <string name="goods_choice_size">尺寸选择</string>
+    <string name="goods_choice_care_of_year">年费选择</string>
+    <string name="goods_introduce_care_of_year">了解年费</string>
+    <string name="goods_choice_amount">数量</string>
+
     <string name="dummy_item_title_label">未知</string>
     <string name="dummy_item_story_label">未知</string>
     <string name="dummy_item_goods_name">未知</string>

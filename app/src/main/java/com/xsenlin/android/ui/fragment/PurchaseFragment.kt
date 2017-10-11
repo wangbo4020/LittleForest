@@ -73,7 +73,10 @@ class PurchaseFragment : BaseFragment() {
             context.resources.getStringArray(R.array.purchase_titles)
         }
 
-        override fun getItem(position: Int): Fragment = DemoFragment.newInstance(mTitles[position])
+        override fun getItem(position: Int): Fragment = when (position) {
+            0 -> GoodsFragment.newInstance()
+            else -> DemoFragment.newInstance(mTitles[position])
+        }
 
         override fun getCount(): Int = mTitles.size
 
