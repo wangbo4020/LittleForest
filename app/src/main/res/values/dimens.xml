@@ -5,6 +5,7 @@
     <dimen name="space_horizontal">0dp</dimen>
 
     <dimen name="divider_thick">8dp</dimen>
+    <dimen name="divider_primary">1px</dimen>
 
     <!-- FirstFragment -->
     <dimen name="first_item_margin_horizontal">@dimen/margin_primary</dimen>
@@ -21,6 +22,9 @@
     <dimen name="item_story_actual_cover_height">150dp</dimen>
 
     <dimen name="item_goods_cover_round">166dp</dimen>
+
+    <!-- PurchaseFragment -->
+    <dimen name="purc_aoumnt_round">25dp</dimen>
 
     <!--  GoodsFragment -->
     <dimen name="goods_cover_height">238dp</dimen>

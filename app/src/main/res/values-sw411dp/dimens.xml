@@ -19,6 +19,9 @@
 
     <dimen name="item_goods_cover_round">190dp</dimen>
 
+    <!-- PurchaseFragment -->
+    <dimen name="purc_aoumnt_round">28.6dp</dimen>
+
     <!--  GoodsFragment -->
     <dimen name="goods_cover_height">272dp</dimen>
 </resources>

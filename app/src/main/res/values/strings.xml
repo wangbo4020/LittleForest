@@ -19,6 +19,9 @@
 
     <string name="purchase_gift_title">礼物</string>
     <string name="purchase_details_title">详情</string>
+    <string name="purchase_price">价格：</string>
+    <string name="purchase_dummy_price">￥00.00</string>
+    <string name="purchase_buy">购买</string>
 
     <string name="goods_choice_size">尺寸选择</string>
     <string name="goods_choice_care_of_year">年费选择</string>
