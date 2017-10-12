@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- FIXME 此处color和dimen需要定义到资源文件中 -->
     <corners android:topRightRadius="5dp" android:bottomRightRadius="5dp" />
     <stroke android:width="@dimen/divider_primary" android:color="@android:color/black" />
 </shape>

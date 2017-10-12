@@ -36,9 +36,9 @@
         android:id="@+id/viewpager"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@android:id/content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@android:id/content"
         app:layout_constraintTop_toBottomOf="@+id/action_bar" />
 
     <android.support.constraint.ConstraintLayout
@@ -46,12 +46,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/background_primary"
+        android:elevation="@dimen/purc_bottom_buy_elevation"
         android:paddingLeft="@dimen/margin_primary"
         android:paddingStart="@dimen/margin_primary"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="8dp">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
         <TextView
             android:id="@android:id/text1"
@@ -67,8 +67,8 @@
             android:layout_height="wrap_content"
             android:text="@string/purchase_dummy_price"
             android:textAppearance="?android:textAppearanceLarge"
-            app:layout_constraintLeft_toRightOf="@android:id/text1"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@android:id/text1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
