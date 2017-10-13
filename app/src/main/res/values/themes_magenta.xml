@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- magenta application theme. -->
+    <style name="App.Theme.Magenta" parent="App.Theme">
+        <item name="colorAccent">@color/magenta</item>
+        <item name="android:radioButtonStyle">@style/App.Widget.Magenta.CompoundButton.RadioButton</item>
+        <item name="android:segmentedButtonStyle">@style/App.Widget.Magenta.Light.SegmentedButton</item>
+    </style>
+
+    <style name="App.Theme.Magenta.NoActionBar" parent="App.Theme.Magenta">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>

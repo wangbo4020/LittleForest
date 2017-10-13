@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.xsenlin.android.ui.fragment.DemoFragment">
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@android:id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

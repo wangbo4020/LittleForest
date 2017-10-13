@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- magenta widget theme. -->
+
+    <style name="App.Widget.Magenta.CompoundButton.RadioButton" parent="App.Widget.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/stroke_radius_magenta_light</item>
+    </style>
+
+    <style name="App.Widget.Magenta.Light.SegmentedButton" parent="Base.AppWidget.Light.SegmentedButton">
+        <item name="android:background">@drawable/stroke_radius_magenta_light</item>
+    </style>
+</resources>

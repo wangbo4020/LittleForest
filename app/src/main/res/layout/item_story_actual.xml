@@ -18,9 +18,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/background_primary">
+        android:background="?android:attr/colorBackground">
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/iv_cover"
             android:layout_width="@dimen/item_story_actual_cover_width"
             android:layout_height="@dimen/item_story_actual_cover_height"
@@ -31,10 +31,10 @@
             app:layout_constraintTop_toTopOf="parent"
             bind:loading="@{@drawable/img_dummy_loading}"
             bind:transform="@{Transforms.TRANSFORM_BASIS_SCALE}"
-            tools:background="@color/window_background_primary"
+            tools:background="?android:attr/windowBackground"
             tools:src="@drawable/img_dummy_loading" />
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"

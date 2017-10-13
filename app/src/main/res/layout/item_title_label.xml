@@ -21,11 +21,11 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/background_primary"
+            android:background="?android:attr/colorBackground"
             android:paddingBottom="@dimen/item_label_space_vertical"
             android:paddingEnd="@dimen/margin_primary"
             android:paddingLeft="@dimen/margin_primary"

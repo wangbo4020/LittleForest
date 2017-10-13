@@ -1,32 +1,5 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
-
-    <style name="AppTheme" parent="Base.AppTheme">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <item name="colorAccent">@color/color_accent</item>
-        <item name="android:colorBackground">@color/background_app_light</item>
-        <item name="android:colorForeground">@color/foreground_app_light</item>
-        <item name="android:windowBackground">@color/window_background_primary</item>
-
-        <item name="android:textColorPrimary">@color/primary_text_app_light</item>
-        <item name="android:textColorPrimaryInverse">@color/primary_text_app_dark</item>
-
-        <item name="android:radioButtonStyle">@style/App.Widget.CompoundButton.RadioButton</item>
-        <item name="android:buttonBarButtonStyle">@style/App.Widget.Button.ButtonBar</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar" parent="AppTheme">
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-    </style>
-
     <!-- TabLayout -->
     <style name="App.Widget.TabLayout" parent="Widget.Design.TabLayout">
         <item name="tabTextAppearance">@style/App.TextAppearance.Tab</item>
@@ -45,17 +18,21 @@
 
     <style name="App.Widget.CompoundButton.RadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:button">@null</item>
-        <item name="android:background">@drawable/stroke_radius_primary</item>
+        <item name="android:background">@drawable/stroke_radius_aquamarine_light</item>
         <item name="android:padding">7.25dp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="App.Widget.Button.ButtonBar" parent="Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:minWidth">112dp</item>
         <!--<item name="android:minHeight">48dp</item>-->
-        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
         <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
-        <item name="android:background">@color/primary_button_app_light</item>
+        <item name="android:background">@color/btn_app_light</item>
     </style>
 
-    <!--<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
+    <style name="App.Widget.Light.SegmentedButton" parent="Base.AppWidget.Light.SegmentedButton">
+        <item name="android:background">@drawable/stroke_radius_aquamarine_light</item>
+    </style>
+
 </resources>

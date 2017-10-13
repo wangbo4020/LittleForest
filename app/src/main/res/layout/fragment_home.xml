@@ -33,7 +33,7 @@
                 style="@style/App.Widget.TabLayout"
                 app:tabMode="scrollable"/>
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:clickable="true"

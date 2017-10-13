@@ -41,13 +41,13 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(view!!, savedInstanceState)
 
-        val toolbar = view!!.findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        mViewPager = view!!.findViewById(R.id.viewpager)
-        mTabLayout = view!!.findViewById(R.id.tablayout)
+        mViewPager = view.findViewById(R.id.viewpager)
+        mTabLayout = view.findViewById(R.id.tablayout)
 
         mViewPager!!.adapter = mPagerAdapter
         mTabLayout!!.setupWithViewPager(mViewPager)
