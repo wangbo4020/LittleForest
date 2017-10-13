@@ -5,10 +5,18 @@
     <color name="color_primary_dark">#303F9F</color>
     <color name="color_accent">#FF4081</color>
     -->
-    <color name="color_primary">#61ce8f</color>
-    <color name="color_primary_dark">#61ce8f</color>
-    <color name="color_accent">@android:color/white</color>
+    <color name="color_primary">@android:color/white</color>
+    <color name="color_primary_dark">@android:color/white</color>
+    <color name="color_accent">#61ce8f</color>
+
+    <color name="foreground_app_light">#4a4a4a</color>
+    <color name="background_app_light">@android:color/white</color>
 
     <color name="window_background_primary">#f3f4f5</color>
-    <color name="background_primary">@color/color_accent</color>
+    <color name="background_primary">@android:color/white</color>
+
+    <color name="primary_text_default_app_light">#4a4a4a</color>
+    <color name="primary_text_checked_app_light">#61ce8f</color>
+
+    <color name="primary_text_default_app_dark">@android:color/white</color>
 </resources>

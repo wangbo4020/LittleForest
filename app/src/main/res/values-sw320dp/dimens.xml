@@ -1,0 +1,23 @@
+<resources><!-- * 0.8888888888888889 -->
+
+    <dimen name="space_primary">7dp</dimen>
+    <dimen name="margin_primary">8.9dp</dimen>
+
+    <dimen name="divider_thick">7dp</dimen>
+
+    <dimen name="item_label_space_vertical">13.3dp</dimen>
+    <dimen name="item_banner_height">180dp</dimen>
+    <dimen name="item_activity_width">147dp</dimen>
+    <dimen name="item_activity_height">66.7dp</dimen>
+
+    <dimen name="item_story_actual_cover_width">88.8dp</dimen>
+    <dimen name="item_story_actual_cover_height">133.3dp</dimen>
+
+    <dimen name="item_goods_cover_round">147dp</dimen>
+
+    <!-- PurchaseFragment -->
+    <dimen name="purc_aoumnt_round">22dp</dimen>
+
+    <!--  GoodsFragment -->
+    <dimen name="goods_cover_height">212dp</dimen>
+</resources>

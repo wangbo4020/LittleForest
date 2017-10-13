@@ -7,6 +7,8 @@
     <dimen name="divider_thick">8dp</dimen>
     <dimen name="divider_primary">1px</dimen>
 
+    <dimen name="radius_small">3dp</dimen>
+
     <!-- FirstFragment -->
     <dimen name="first_item_margin_horizontal">@dimen/margin_primary</dimen>
     <dimen name="first_item_interval_horizontal">@dimen/space_primary</dimen>
@@ -24,8 +26,7 @@
     <dimen name="item_goods_cover_round">166dp</dimen>
 
     <!-- PurchaseFragment -->
-    <dimen name="purc_aoumnt_round">25dp</dimen>
-    <dimen name="purc_bottom_buy_elevation">6dp</dimen>
+    <dimen name="purc_bottom_buy_elevation">2dp</dimen>
 
     <!--  GoodsFragment -->
     <dimen name="goods_cover_height">238dp</dimen>
@@ -34,4 +35,5 @@
     <dimen name="goods_size_margin_vertical">15dp</dimen>
     <dimen name="goods_care_margin_vertical">15dp</dimen>
     <dimen name="goods_amount_margin_vertical">12dp</dimen>
+    <dimen name="goods_aoumnt_round">25dp</dimen>
 </resources>

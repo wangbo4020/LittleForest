@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!-- FIXME 此处color和dimen需要定义到资源文件中 -->
-    <corners android:radius="5dp" />
-    <stroke android:width="@dimen/divider_primary" android:color="@android:color/black" />
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:constantSize="true">
+    <item android:alpha="@dimen/disabled_alpha_material_light" android:state_enabled="false">
+        <shape>
+            <corners android:radius="@dimen/radius_small"/>
+            <stroke android:width="@dimen/divider_primary" android:color="@color/primary_text_default_app_light" android:dashGap="1dp" android:dashWidth="3dp"/>
+        </shape>
+    </item>
+    <item android:state_checked="true">
+        <shape>
+            <corners android:radius="@dimen/radius_small"/>
+            <stroke android:width="@dimen/divider_primary" android:color="@color/primary_text_checked_app_light"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <corners android:radius="@dimen/radius_small"/>
+            <stroke android:width="@dimen/divider_primary" android:color="@color/primary_text_default_app_light"/>
+        </shape>
+    </item>
+</selector>
