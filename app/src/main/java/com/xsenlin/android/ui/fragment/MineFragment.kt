@@ -19,13 +19,21 @@ class MineFragment : BaseFragment() {
         }
     }
 
+    private val mSignFragment: SignFragment by lazy { SignFragment.newInstance() }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_mine, container, false)
-        return rootView
+        return inflater.inflate(R.layout.fragment_mine, container, false)
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view!!, savedInstanceState)
+        // FIXME 根据条件判断，显示SignFragment or InfoFragment
+        childFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, mSignFragment, SignFragment.TAG)
+                .show(mSignFragment).commitNow()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putLong("time", System.currentTimeMillis())
     }
 }

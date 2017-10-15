@@ -4,6 +4,9 @@
     <!-- magenta application theme. -->
     <style name="App.Theme.Magenta" parent="App.Theme">
         <item name="colorAccent">@color/magenta</item>
+        <item name="android:buttonStyle">@style/App.Widget.Magenta.Button</item>
+        <item name="android:buttonStyleSmall">@style/App.Widget.Magenta.Button.Small</item>
+        <item name="android:buttonBarButtonStyle">@style/App.Widget.Magenta.Button.ButtonBar</item>
         <item name="android:radioButtonStyle">@style/App.Widget.Magenta.CompoundButton.RadioButton</item>
         <item name="android:segmentedButtonStyle">@style/App.Widget.Magenta.Light.SegmentedButton</item>
     </style>

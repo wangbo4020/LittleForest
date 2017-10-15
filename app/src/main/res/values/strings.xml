@@ -28,6 +28,14 @@
     <string name="goods_introduce_care_of_year">了解年费</string>
     <string name="goods_choice_amount">数量</string>
 
+    <string name="sign_title">注册登录</string>
+    <string name="sign_phont_hint">输入手机号</string>
+    <string name="sign_verif_code_hint">短信验证码</string>
+    <string name="sign_password_hint">输入密码</string>
+    <string name="sign_get_verif_code">获取验证码</string>
+    <string name="sign_in_or_up">确定</string>
+    <string name="sign_third_login">使用社交账号登录</string>
+
     <string name="dummy_item_title_label">未知</string>
     <string name="dummy_item_story_label">未知</string>
     <string name="dummy_item_goods_name">未知</string>

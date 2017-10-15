@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- FIXME 这里使用inset标签增加内边距 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <item app:alpha="@dimen/disabled_alpha_material_light" android:state_enabled="false">
         <shape>

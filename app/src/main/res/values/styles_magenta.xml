@@ -2,6 +2,18 @@
 <resources>
     <!-- magenta widget theme. -->
 
+    <style name="App.Widget.Magenta.Button" parent="App.Widget.Button">
+        <!--<item name="android:background">@drawable/btn_app_magenta_light</item>-->
+    </style>
+
+    <style name="App.Widget.Magenta.Button.Small" parent="App.Widget.Button.Small">
+        <!--<item name="android:background">@drawable/btn_app_magenta_light</item>-->
+    </style>
+
+    <style name="App.Widget.Magenta.Button.ButtonBar" parent="App.Widget.Button.ButtonBar">
+        <item name="android:background">@drawable/btn_app_magenta_light</item>
+    </style>
+
     <style name="App.Widget.Magenta.CompoundButton.RadioButton" parent="App.Widget.CompoundButton.RadioButton">
         <item name="android:background">@drawable/stroke_radius_magenta_light</item>
     </style>

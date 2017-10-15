@@ -16,6 +16,17 @@
         <item name="itemTextColor">?android:attr/textColorPrimary</item>
     </style>
 
+    <style name="App.Widget.Button" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
+        <!--<item name="android:background">@drawable/btn_app_aquamarine_light</item>-->
+    </style>
+
+    <style name="App.Widget.Button.Small" parent="Widget.AppCompat.Button.Small">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
+        <!--<item name="android:background">@drawable/btn_app_aquamarine_light</item>-->
+    </style>
+
     <style name="App.Widget.CompoundButton.RadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:button">@null</item>
         <item name="android:background">@drawable/stroke_radius_aquamarine_light</item>
@@ -28,7 +39,7 @@
         <!--<item name="android:minHeight">48dp</item>-->
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
         <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
-        <item name="android:background">@color/btn_app_light</item>
+        <item name="android:background">@drawable/btn_app_aquamarine_light</item>
     </style>
 
     <style name="App.Widget.Light.SegmentedButton" parent="Base.AppWidget.Light.SegmentedButton">

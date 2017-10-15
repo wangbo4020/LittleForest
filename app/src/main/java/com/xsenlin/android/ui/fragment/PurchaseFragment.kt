@@ -75,6 +75,7 @@ class PurchaseFragment : BaseFragment() {
 
         override fun getItem(position: Int): Fragment = when (position) {
             0 -> GoodsFragment.newInstance()
+            1 -> DetailsFragment.newInstance()
             else -> DemoFragment.newInstance(mTitles[position])
         }
 

@@ -1,7 +1,10 @@
 <resources>
 
-    <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Base.AppTheme.V21" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorControlNormal">@color/magenta</item>
         <item name="android:disabledAlpha">@dimen/disabled_alpha_material_light</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
+
+    <style name="Base.AppTheme" parent="Base.AppTheme.V21" />
 </resources>

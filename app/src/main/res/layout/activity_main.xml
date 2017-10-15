@@ -5,8 +5,8 @@
     android:layout_height="match_parent">
 
     <fragment
-        android:name="com.xsenlin.android.ui.fragment.PurchaseFragment"
+        android:name="com.xsenlin.android.ui.fragment.MainFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:tag="PurchaseFragment" />
+        android:tag="MainFragment" />
 </FrameLayout>
