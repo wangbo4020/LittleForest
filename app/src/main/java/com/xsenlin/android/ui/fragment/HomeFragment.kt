@@ -2,17 +2,20 @@ package com.xsenlin.android.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
-import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import com.xsenlin.android.R
-import com.xsenlin.android.ui.activitiy.BaseActivity
-import com.xsenlin.android.ui.model.ActivitySimple.ActivitySimpleList
+import com.xsenlin.android.ui.ContentLoadingDelegate
+import com.xsenlin.android.ui.model.ModelList
+import com.xsenlin.android.widget.BasisScaleTransformation
+import com.xsenlin.android.widget.ScalePageTransformer
 
 /**
  * Created by Dylan on 2017/8/31.
@@ -27,13 +30,19 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private var mTabLayout: TabLayout? = null
+    private val mData: ModelList<String> by lazy {
+        val list: ModelList<String> = object : ModelList<String>() {}
+        list.add("file:///android_asset/demo/card_0.webp")
+        list.add("file:///android_asset/demo/card_1.webp")
+        list.add("file:///android_asset/demo/card_2.webp")
+        list
+    }
     private var mViewPager: ViewPager? = null
-    private val mPagerAdapter: HomePagerAdapter by lazy { HomePagerAdapter(context, childFragmentManager) }
+    private var mPagerAdapter: HomePagerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+        mPagerAdapter = HomePagerAdapter(context, getLayoutInflater(savedInstanceState), mData)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,35 +52,16 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view!!, savedInstanceState)
 
-        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
         mViewPager = view.findViewById(R.id.viewpager)
-        mTabLayout = view.findViewById(R.id.tablayout)
-
         mViewPager!!.adapter = mPagerAdapter
-        mTabLayout!!.setupWithViewPager(mViewPager)
+        mViewPager!!.pageMargin = resources.getDimensionPixelOffset(R.dimen.home_page_margin_horizontal)
+        mViewPager!!.offscreenPageLimit = 3
+        mViewPager!!.setPageTransformer(true, ScalePageTransformer())
 
         if (savedInstanceState != null) {
             var currentItem = savedInstanceState.getInt("CurrentItem")
             mViewPager!!.setCurrentItem(currentItem)
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater!!.inflate(R.menu.menu_home, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item!!.itemId
-
-        return if (id == R.id.action_scan_qr) {
-            true
-        } else super.onOptionsItemSelected(item)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -81,36 +71,50 @@ class HomeFragment : BaseFragment() {
 
     override fun onDestroyView() {
         mViewPager?.adapter = null
-        mTabLayout?.setupWithViewPager(null)
         super.onDestroyView()
     }
 
-    class HomePagerAdapter(val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    class HomePagerAdapter(val context: Context, inflater: LayoutInflater, val data: ModelList<String>) : PagerAdapter() {
 
-        private val mCategoryGift: Array<String>
-
-        init {
-            mCategoryGift = context.resources.getStringArray(R.array.gift_category)
+        private val mPagers: Array<View> by lazy {
+            // ViewPager只缓存3个View
+            arrayOf(inflater.inflate(R.layout.pager_home, null),
+                    inflater.inflate(R.layout.pager_home, null),
+                    inflater.inflate(R.layout.pager_home, null))
         }
+        private val mProgress: ContentLoadingDelegate by lazy { ContentLoadingDelegate() }
 
-        override fun getItem(position: Int): Fragment {
-
-            if (position == 0) return FirstFragment.newInstance()
-            else if (position == 1) return SecondFragment.newInstance()
-            val text : CharSequence = when {
-                position == 0 -> context.getString(R.string.large_text)
-                position < mCategoryGift.size -> mCategoryGift[position]
-                else -> "${position + 1}"
+        override fun instantiateItem(container: ViewGroup, position: Int): Any {
+            val pager = mPagers[position % mPagers.size]
+            if (pager.parent == null) {
+                container.addView(pager)
             }
-            return DemoFragment.newInstance(text)
+            val pageWidth = container.measuredWidth * getPageWidth(position)
+            Log.d(TAG, "instantiateItem: position = $position, Container.width = " + container.measuredWidth)
+            mProgress.setup(pager)
+            mProgress.show()
+            Picasso.with(context)
+                    .load(data.get(position))
+                    .transform(BasisScaleTransformation(data.get(position), pageWidth.toInt()))
+                    .into(pager.findViewById<ImageView>(R.id.image), object : Callback.EmptyCallback() {
+                        override fun onSuccess() {
+                            mProgress.hide()
+                        }
+                    })
+            return pager
         }
 
-        override fun getCount(): Int {
-            return mCategoryGift.size
+        override fun isViewFromObject(view: View?, any: Any?): Boolean = view == any
+
+        override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
+            super.destroyItem(container, position, `object`)
         }
 
-        override fun getPageTitle(position: Int): CharSequence {
-            return if (position < mCategoryGift.size) mCategoryGift[position] else "Title ${position + 1}"
+        override fun getPageWidth(position: Int): Float {
+
+            return 0.7f
         }
+
+        override fun getCount(): Int = data.count
     }
 }

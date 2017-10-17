@@ -9,6 +9,9 @@
 
     <dimen name="radius_small">3dp</dimen>
 
+    <!-- HomeFragment -->
+    <dimen name="home_page_margin_horizontal">18dp</dimen>
+
     <!-- FirstFragment -->
     <dimen name="first_item_margin_horizontal">@dimen/margin_primary</dimen>
     <dimen name="first_item_interval_horizontal">@dimen/space_primary</dimen>
@@ -36,4 +39,8 @@
     <dimen name="goods_care_margin_vertical">15dp</dimen>
     <dimen name="goods_amount_margin_vertical">12dp</dimen>
     <dimen name="goods_aoumnt_round">25dp</dimen>
+
+    <!-- SignFragment -->
+    <dimen name="sign_form_margin_horizonal">42dp</dimen>
+    <dimen name="sign_btns_margin_horizonal">27dp</dimen>
 </resources>

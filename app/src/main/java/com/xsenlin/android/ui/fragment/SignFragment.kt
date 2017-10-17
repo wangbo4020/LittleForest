@@ -38,7 +38,7 @@ class SignFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         etPhone!!.requestFocus()
-        val imm: InputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(etPhone, InputMethodManager.SHOW_FORCED)
+//        val imm: InputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        imm.showSoftInput(etPhone, InputMethodManager.SHOW_FORCED)
     }
 }
