@@ -10,7 +10,7 @@
     <dimen name="radius_small">3dp</dimen>
 
     <!-- HomeFragment -->
-    <dimen name="home_page_margin_horizontal">18dp</dimen>
+    <dimen name="home_page_margin_horizontal">9dp</dimen>
 
     <!-- FirstFragment -->
     <dimen name="first_item_margin_horizontal">@dimen/margin_primary</dimen>
