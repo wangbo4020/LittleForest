@@ -1,10 +1,8 @@
 package com.xsenlin.android.ui.fragment
 
-import android.content.Context
+import android.graphics.Point
 import android.os.Bundle
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
-import android.util.Log
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +10,23 @@ import android.widget.ImageView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.xsenlin.android.R
+import com.xsenlin.android.databinding.ItemHomeBinding
 import com.xsenlin.android.ui.ContentLoadingDelegate
-import com.xsenlin.android.ui.model.ModelList
 import com.xsenlin.android.widget.BasisScaleTransformation
-import com.xsenlin.android.widget.ScalePageTransformer
+import com.yarolegovich.discretescrollview.DiscreteScrollView
+import com.yarolegovich.discretescrollview.InfiniteScrollAdapter
+import com.yarolegovich.discretescrollview.Orientation
+import com.yarolegovich.discretescrollview.transform.ScaleTransformer
+import android.opengl.ETC1.getHeight
+import android.opengl.ETC1.getWidth
+import android.view.WindowManager
+import com.xsenlin.android.ui.StartFragment
+
 
 /**
  * Created by Dylan on 2017/8/31.
  */
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(), DiscreteScrollView.OnItemChangedListener<HomeFragment.HomeHolder> {
 
     companion object {
         val TAG = "HomeFragment"
@@ -30,19 +36,23 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private val mData: ModelList<String> by lazy {
-        val list: ModelList<String> = object : ModelList<String>() {}
-        list.add("file:///android_asset/demo/card_0.webp")
-        list.add("file:///android_asset/demo/card_1.webp")
-        list.add("file:///android_asset/demo/card_2.webp")
-        list
+    private val mData: Array<String> by lazy {
+        arrayOf("file:///android_asset/demo/card_0.webp",
+                "file:///android_asset/demo/card_1.webp",
+                "file:///android_asset/demo/card_2.webp",
+                "file:///android_asset/demo/card_3.webp")
     }
-    private var mViewPager: ViewPager? = null
-    private var mPagerAdapter: HomePagerAdapter? = null
+
+    private var mDiscreteWidget: DiscreteScrollView? = null
+    private var mAdapter: InfiniteScrollAdapter<HomeHolder>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPagerAdapter = HomePagerAdapter(context, getLayoutInflater(savedInstanceState), mData)
+        mAdapter = InfiniteScrollAdapter.wrap(HomeAdapter(getLayoutInflater(savedInstanceState), mData))
+        val p = Point()
+        activity.getWindowManager().defaultDisplay.getSize(p)
+
+        android.util.Log.d(TAG, "screen " + p + ", density " + resources.displayMetrics.density)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -51,70 +61,55 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view!!, savedInstanceState)
-
-        mViewPager = view.findViewById(R.id.viewpager)
-        mViewPager!!.adapter = mPagerAdapter
-        mViewPager!!.pageMargin = resources.getDimensionPixelOffset(R.dimen.home_page_margin_horizontal)
-        mViewPager!!.offscreenPageLimit = 3
-        mViewPager!!.setPageTransformer(true, ScalePageTransformer())
-
-        if (savedInstanceState != null) {
-            var currentItem = savedInstanceState.getInt("CurrentItem")
-            mViewPager!!.setCurrentItem(currentItem)
-        }
+        mDiscreteWidget = view.findViewById(R.id.discrete_widget)
+        mDiscreteWidget!!.setOrientation(Orientation.HORIZONTAL)
+        mDiscreteWidget!!.adapter = mAdapter
+        mDiscreteWidget!!.setItemTransitionTimeMillis(150)
+        mDiscreteWidget!!.setItemTransformer(ScaleTransformer.Builder().setMinScale(0.9f).build())
+        mDiscreteWidget!!.addOnItemChangedListener(this)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt("CurrentItem", mViewPager!!.currentItem)
+    }
+    override fun onCurrentItemChanged(viewHolder: HomeHolder?, adapterPosition: Int) {
+        val position = mAdapter!!.getRealPosition(adapterPosition)
+//        android.util.Log.d(TAG, "onCurrentItemChanged " + position)
     }
 
     override fun onDestroyView() {
-        mViewPager?.adapter = null
+        mDiscreteWidget?.adapter = null
         super.onDestroyView()
     }
 
-    class HomePagerAdapter(val context: Context, inflater: LayoutInflater, val data: ModelList<String>) : PagerAdapter() {
-
-        private val mPagers: Array<View> by lazy {
-            // ViewPager只缓存3个View
-            arrayOf(inflater.inflate(R.layout.pager_home, null),
-                    inflater.inflate(R.layout.pager_home, null),
-                    inflater.inflate(R.layout.pager_home, null))
-        }
-        private val mProgress: ContentLoadingDelegate by lazy { ContentLoadingDelegate() }
-
-        override fun instantiateItem(container: ViewGroup, position: Int): Any {
-            val pager = mPagers[position % mPagers.size]
-            if (pager.parent == null) {
-                container.addView(pager)
+    inner class HomeHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        override fun onClick(v: View?) {
+            val act = activity
+            if (act is StartFragment) {
+                act.startFragment(ClassFragment.newInstance(), ClassFragment.TAG)
             }
-            val pageWidth = container.measuredWidth * getPageWidth(position)
-            Log.d(TAG, "instantiateItem: position = $position, Container.width = " + container.measuredWidth)
-            mProgress.setup(pager)
-            mProgress.show()
-            Picasso.with(context)
-                    .load(data.get(position))
-                    .transform(BasisScaleTransformation(data.get(position), pageWidth.toInt()))
-                    .into(pager.findViewById<ImageView>(R.id.image), object : Callback.EmptyCallback() {
-                        override fun onSuccess() {
-                            mProgress.hide()
-                        }
-                    })
-            return pager
         }
 
-        override fun isViewFromObject(view: View?, any: Any?): Boolean = view == any
+        fun bindTo(data: String) {
+            binding.image.tag = data
+            binding.data = data
+            binding.image.setOnClickListener(this)
+        }
+    }
 
-        override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
-            super.destroyItem(container, position, `object`)
+    inner class HomeAdapter(val inflater: LayoutInflater, val data: Array<String>) : RecyclerView.Adapter<HomeHolder>() {
+        private val mProgress: ContentLoadingDelegate by lazy { ContentLoadingDelegate() }
+        override fun onBindViewHolder(holder: HomeHolder, position: Int) {
+            mProgress.setup(holder.itemView)
+//            mProgress.show()
+            holder.bindTo(mData[position])
         }
 
-        override fun getPageWidth(position: Int): Float {
-
-            return 0.7f
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeHolder {
+            return HomeHolder(ItemHomeBinding.inflate(inflater))
         }
 
-        override fun getCount(): Int = data.count
+        override fun getItemCount(): Int = data.size
+
     }
 }

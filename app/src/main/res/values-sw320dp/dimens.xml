@@ -5,6 +5,15 @@
 
     <dimen name="divider_thick">7dp</dimen>
 
+    <!-- HomeFragment -->
+    <dimen name="home_page_margin_horizontal">0dp</dimen>
+    <dimen name="home_item_width">240dp</dimen>
+    <dimen name="home_item_height">356dp</dimen>
+    <dimen name="home_margin_top_name">27dp</dimen>
+    <dimen name="home_margin_top_label">8dp</dimen>
+    <dimen name="home_margin_top_pager">23dp</dimen>
+
+    <!-- FirstFragment -->
     <dimen name="item_label_space_vertical">13.3dp</dimen>
     <dimen name="item_banner_height">180dp</dimen>
     <dimen name="item_activity_width">147dp</dimen>

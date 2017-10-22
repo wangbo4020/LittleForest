@@ -20,10 +20,14 @@ class PurchaseFragment : BaseFragment() {
 
     companion object {
         val TAG = "PurchaseFragment"
+        val KEY_COVER_URL = "coverUrl"
 
         @JvmStatic
-        fun newInstance(): PurchaseFragment {
-            return PurchaseFragment()
+        fun newInstance(coverUrl: String): PurchaseFragment {
+            val fragment = PurchaseFragment()
+            fragment.arguments = Bundle()
+            fragment.arguments.putString(KEY_COVER_URL, coverUrl)
+            return fragment
         }
     }
 
@@ -41,7 +45,7 @@ class PurchaseFragment : BaseFragment() {
         val toolbar: Toolbar = view!!.findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener {
-            activity.finish()
+            fragmentManager.popBackStack()
         }
 
         mViewPager = view.findViewById(R.id.viewpager)
@@ -67,14 +71,14 @@ class PurchaseFragment : BaseFragment() {
         super.onDestroyView()
     }
 
-    class PurchasePagerAdapter(val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    inner class PurchasePagerAdapter(val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         private val mTitles: Array<String> by lazy {
             context.resources.getStringArray(R.array.purchase_titles)
         }
 
         override fun getItem(position: Int): Fragment = when (position) {
-            0 -> GoodsFragment.newInstance()
+            0 -> GoodsFragment.newInstance(arrayOf(arguments.getString(KEY_COVER_URL)))
             1 -> DetailsFragment.newInstance()
             else -> DemoFragment.newInstance(mTitles[position])
         }

@@ -1,4 +1,4 @@
-<resources><!-- * 0.8888888888888889 -->
+<resources>
 
     <dimen name="space_primary">8dp</dimen>
     <dimen name="margin_primary">10dp</dimen>

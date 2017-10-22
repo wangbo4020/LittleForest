@@ -2,6 +2,7 @@ package com.xsenlin.android.ui
 
 import android.databinding.BindingAdapter
 import android.graphics.drawable.Drawable
+import android.os.Handler
 import android.support.constraint.ConstraintLayout
 import android.support.v4.view.MarginLayoutParamsCompat
 import android.support.v4.view.ViewCompat
@@ -20,6 +21,7 @@ object AppBindingAdapter {
 
     val printLog = false
     val TAG = "AppBindingAdapter"
+    val mHandler: Handler by lazy { Handler() }
 
     @JvmStatic
     val TRANSFORM_BASIS_SCALE = 1
@@ -108,8 +110,10 @@ object AppBindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("android:src", "bind:transform", "bind:loading", "bind:error", requireAll = false)
-    fun setImageUrl(view: ImageView, url: String, trans: Int, loading: Drawable?, error: Drawable?) {
+    @BindingAdapter("android:src", "bind:transform", "bind:loading", "bind:error", "bind:post", requireAll = false)
+    fun setImageUrl(view: ImageView, url: String, trans: Int, loading: Drawable?, error: Drawable?, post: Boolean?) {
+        val runnable = Runnable(){
+
         if (printLog) Log.d(TAG, "setImageUrl trans " + trans + " loading $loading url " + url + " " + view.width + " " + view.measuredWidth + " " + url)
 
         val creator = Picasso.with(view.context).load(url)
@@ -125,7 +129,12 @@ object AppBindingAdapter {
         if (error != null) {
             creator.error(error)
         }
-        creator.into(view)
+        creator.into(view)}
+        if (post != null && post) {
+            mHandler.post(runnable)
+        } else {
+            runnable.run()
+        }
     }
 
     @JvmStatic

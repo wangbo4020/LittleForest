@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.xsenlin.android.ui.AppBindingAdapter" />
+
+        <variable
+            name="data"
+            type="String" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="@dimen/home_item_width"
+        android:layout_height="@dimen/home_item_height">
+
+        <android.support.v4.widget.ContentLoadingProgressBar
+            android:id="@+id/content_loading_widget"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="@dimen/home_item_width"
+            android:layout_height="@dimen/home_item_height"
+            android:src="@{data}"
+            bind:post="@{true}"
+            bind:transform="@{AppBindingAdapter.TRANSFORM_BASIS_SCALE}" />
+    </FrameLayout>
+</layout>

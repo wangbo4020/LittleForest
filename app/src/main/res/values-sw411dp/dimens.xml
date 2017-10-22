@@ -6,6 +6,13 @@
 
     <dimen name="divider_thick">9.1dp</dimen>
 
+    <!-- HomeFragment -->
+    <dimen name="home_item_width">308dp</dimen>
+    <dimen name="home_item_height">457dp</dimen>
+    <dimen name="home_margin_top_name">45dp</dimen>
+    <dimen name="home_margin_top_label">10dp</dimen>
+    <dimen name="home_margin_top_pager">30dp</dimen>
+
     <!-- FirstFragment -->
     <dimen name="item_label_space_vertical">17dp</dimen>
 
