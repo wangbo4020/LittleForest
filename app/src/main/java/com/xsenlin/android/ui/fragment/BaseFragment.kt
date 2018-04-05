@@ -3,6 +3,7 @@ package com.xsenlin.android.ui.fragment
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.support.annotation.IdRes
 import android.support.annotation.Nullable
 import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
@@ -31,8 +32,8 @@ open class BaseFragment : Fragment() {
     }
 
     /* - - - - - - - - - - - - - - - ContentLoadingDelegate Start - - - - - - - - - - - - - - - - */
-    protected fun setupContentLoading(view: View) {
-        mContentLoadingDelegate.setup(view)
+    protected fun setupContentLoading(@IdRes id: Int, view: View) {
+        mContentLoadingDelegate.setup(id, view)
     }
 
     protected fun showContentLoading() {
@@ -59,7 +60,7 @@ open class BaseFragment : Fragment() {
         mLifecycleLogDelegate.onAttach(context)
     }
 
-    override fun onAttachFragment(childFragment: Fragment?) {
+    override fun onAttachFragment(childFragment: Fragment) {
         super.onAttachFragment(childFragment)
         mLifecycleLogDelegate.onAttachFragment(childFragment)
     }

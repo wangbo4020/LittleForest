@@ -1,7 +1,6 @@
 package com.xsenlin.android.ui.model
 
 import android.content.res.Resources
-import android.util.Log
 import android.util.SparseArray
 import com.xsenlin.android.ui.model.ActivitySimple.ActivitySimpleList
 import com.xsenlin.android.ui.model.BannerInfo.BannerInfoList

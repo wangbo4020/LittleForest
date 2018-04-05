@@ -1,7 +1,6 @@
 package com.xsenlin.android
 
 import android.app.Application
-import android.content.res.Configuration
 import com.github.moduth.blockcanary.BlockCanary
 import com.github.moduth.blockcanary.BlockCanaryContext
 import com.squareup.leakcanary.LeakCanary
@@ -15,10 +14,6 @@ class App : Application() {
         super.onCreate()
 
         setupCanary()
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration?) {
-        super.onConfigurationChanged(newConfig)
     }
 
     fun setupCanary() {

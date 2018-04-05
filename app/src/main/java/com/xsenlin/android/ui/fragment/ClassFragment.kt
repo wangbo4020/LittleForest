@@ -52,13 +52,13 @@ class ClassFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view!!, savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener({ fragmentManager!!.popBackStack() })
 
-        setupContentLoading(view)
+        setupContentLoading(R.id.content_loading_widget, view)
         hideContentLoading()
 
         mSwipeRefresh = view!!.findViewById(R.id.swipe_refresh_widget)

@@ -10,8 +10,6 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.xsenlin.android.R
 import com.xsenlin.android.widget.BasisScaleTransformation
-import io.reactivex.Observable
-import io.reactivex.functions.BiFunction
 
 /**
  * Created by Dylan on 2017/10/14.
@@ -33,7 +31,7 @@ class DetailsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupContentLoading(view)
+        setupContentLoading(R.id.content_loading_widget, view)
 
 //        Observable.create<ImageWrap> { e ->
 //            e.onNext(ImageWrap("file:///android_asset/demo/details_0_0.webp", view.findViewById<ImageView>(R.id.image1)))

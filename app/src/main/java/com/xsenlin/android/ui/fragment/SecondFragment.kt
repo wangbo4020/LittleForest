@@ -34,7 +34,7 @@ class SecondFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupContentLoading(view)
+        setupContentLoading(R.id.content_loading_widget, view)
         hideContentLoading()
         mSwipeRefresh = view.findViewById(R.id.swipe_refresh_widget)
         mSwipeRefresh!!.setOnRefreshListener(this)

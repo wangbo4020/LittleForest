@@ -6,21 +6,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 import com.xsenlin.android.R
 import com.xsenlin.android.databinding.ItemHomeBinding
-import com.xsenlin.android.ui.ContentLoadingDelegate
-import com.xsenlin.android.widget.BasisScaleTransformation
+import com.xsenlin.android.ui.StartFragment
 import com.yarolegovich.discretescrollview.DiscreteScrollView
 import com.yarolegovich.discretescrollview.InfiniteScrollAdapter
 import com.yarolegovich.discretescrollview.Orientation
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
-import android.opengl.ETC1.getHeight
-import android.opengl.ETC1.getWidth
-import android.view.WindowManager
-import com.xsenlin.android.ui.StartFragment
 
 
 /**
@@ -69,9 +61,6 @@ class HomeFragment : BaseFragment(), DiscreteScrollView.OnItemChangedListener<Ho
         mDiscreteWidget!!.addOnItemChangedListener(this)
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-    }
     override fun onCurrentItemChanged(viewHolder: HomeHolder?, adapterPosition: Int) {
         val position = mAdapter!!.getRealPosition(adapterPosition)
 //        android.util.Log.d(TAG, "onCurrentItemChanged " + position)
@@ -98,9 +87,9 @@ class HomeFragment : BaseFragment(), DiscreteScrollView.OnItemChangedListener<Ho
     }
 
     inner class HomeAdapter(val inflater: LayoutInflater, val data: Array<String>) : RecyclerView.Adapter<HomeHolder>() {
-        private val mProgress: ContentLoadingDelegate by lazy { ContentLoadingDelegate() }
+//        private val mProgress: ContentLoadingDelegate by lazy { ContentLoadingDelegate() }
         override fun onBindViewHolder(holder: HomeHolder, position: Int) {
-            mProgress.setup(holder.itemView)
+//            mProgress.setup(R.id.content_loading_widget, holder.itemView)
 //            mProgress.show()
             holder.bindTo(mData[position])
         }
