@@ -26,8 +26,9 @@ class GoodsFragment : BaseFragment() {
 
         fun newInstance(coverUrls: Array<String>): GoodsFragment {
             val fragment = GoodsFragment()
-            fragment.arguments = Bundle()
-            fragment.arguments.putStringArray(KEY_COVER_URLS, coverUrls)
+            val arguments = Bundle()
+            arguments.putStringArray(KEY_COVER_URLS, coverUrls)
+            fragment.arguments = arguments
             android.util.Log.d("III", "covers " + Arrays.toString(coverUrls))
             return fragment
         }
@@ -38,14 +39,14 @@ class GoodsFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mAdapter = GoodsPagerAdapter(getLayoutInflater(savedInstanceState))
+        mAdapter = GoodsPagerAdapter(getLayoutInflater())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_goods, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mViewPager = view!!.findViewById(R.id.viewpager)
         mViewPager!!.adapter = mAdapter
@@ -59,7 +60,7 @@ class GoodsFragment : BaseFragment() {
     inner class GoodsPagerAdapter(val inflater: LayoutInflater) : PagerAdapter() {
 
         val mHandler by lazy { Handler() }
-        val mCovers by lazy { arguments.getStringArray(KEY_COVER_URLS) }
+        val mCovers by lazy { arguments!!.getStringArray(KEY_COVER_URLS) }
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             val pager = inflater.inflate(R.layout.pager_goods, container, false)
@@ -81,11 +82,11 @@ class GoodsFragment : BaseFragment() {
             return pager
         }
 
-        override fun destroyItem(container: ViewGroup, position: Int, any: Any?) {
+        override fun destroyItem(container: ViewGroup, position: Int, any: Any) {
             container.removeView(any as View)
         }
 
-        override fun isViewFromObject(view: View?, any: Any?): Boolean = view == any
+        override fun isViewFromObject(view: View, any: Any): Boolean = view == any
 
         override fun getCount(): Int = mCovers.size
 

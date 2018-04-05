@@ -25,8 +25,8 @@ class MineFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_mine, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view!!, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         // FIXME 根据条件判断，显示SignFragment or InfoFragment
         childFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, mSignFragment, SignFragment.TAG)

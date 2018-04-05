@@ -12,8 +12,9 @@ class SafeFragment : DemoFragment() {
 
         fun newInstance(): SafeFragment {
             val f = SafeFragment()
-            f.arguments = Bundle()
-            f.arguments.putCharSequence(KEY_TEXT, TAG)
+            val arguments = Bundle()
+            arguments.putCharSequence(KEY_TEXT, TAG)
+            f.arguments = arguments
             return f
         }
     }

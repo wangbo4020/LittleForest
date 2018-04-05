@@ -59,7 +59,7 @@ class MainFragment : BaseFragment(), BottomNavigationView.OnNavigationItemSelect
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 //        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)

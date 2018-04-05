@@ -25,27 +25,28 @@ class PurchaseFragment : BaseFragment() {
         @JvmStatic
         fun newInstance(coverUrl: String): PurchaseFragment {
             val fragment = PurchaseFragment()
-            fragment.arguments = Bundle()
-            fragment.arguments.putString(KEY_COVER_URL, coverUrl)
+            val arguments = Bundle()
+            arguments.putString(KEY_COVER_URL, coverUrl)
+            fragment.arguments = arguments
             return fragment
         }
     }
 
     private var mTabLayout: TabLayout? = null
     private var mViewPager: ViewPager? = null
-    private val mPagerAdapter: PurchasePagerAdapter by lazy { PurchasePagerAdapter(context, childFragmentManager) }
+    private val mPagerAdapter: PurchasePagerAdapter by lazy { PurchasePagerAdapter(context!!, childFragmentManager) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_purchase, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val toolbar: Toolbar = view!!.findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener {
-            fragmentManager.popBackStack()
+            fragmentManager!!.popBackStack()
         }
 
         mViewPager = view.findViewById(R.id.viewpager)
@@ -78,7 +79,7 @@ class PurchaseFragment : BaseFragment() {
         }
 
         override fun getItem(position: Int): Fragment = when (position) {
-            0 -> GoodsFragment.newInstance(arrayOf(arguments.getString(KEY_COVER_URL)))
+            0 -> GoodsFragment.newInstance(arrayOf(arguments!!.getString(KEY_COVER_URL)))
             1 -> DetailsFragment.newInstance()
             else -> DemoFragment.newInstance(mTitles[position])
         }

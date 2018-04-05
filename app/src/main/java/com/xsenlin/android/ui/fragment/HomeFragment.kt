@@ -48,9 +48,9 @@ class HomeFragment : BaseFragment(), DiscreteScrollView.OnItemChangedListener<Ho
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mAdapter = InfiniteScrollAdapter.wrap(HomeAdapter(getLayoutInflater(savedInstanceState), mData))
+        mAdapter = InfiniteScrollAdapter.wrap(HomeAdapter(getLayoutInflater(), mData))
         val p = Point()
-        activity.getWindowManager().defaultDisplay.getSize(p)
+        activity!!.getWindowManager().defaultDisplay.getSize(p)
 
         android.util.Log.d(TAG, "screen " + p + ", density " + resources.displayMetrics.density)
     }
@@ -59,8 +59,8 @@ class HomeFragment : BaseFragment(), DiscreteScrollView.OnItemChangedListener<Ho
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view!!, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         mDiscreteWidget = view.findViewById(R.id.discrete_widget)
         mDiscreteWidget!!.setOrientation(Orientation.HORIZONTAL)
         mDiscreteWidget!!.adapter = mAdapter
@@ -78,7 +78,7 @@ class HomeFragment : BaseFragment(), DiscreteScrollView.OnItemChangedListener<Ho
     }
 
     override fun onDestroyView() {
-        mDiscreteWidget?.adapter = null
+//        mDiscreteWidget?.adapter = null
         super.onDestroyView()
     }
 

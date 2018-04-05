@@ -19,8 +19,9 @@ open class DemoFragment : BaseFragment() {
         @JvmStatic
         fun newInstance(text : CharSequence) : DemoFragment{
             val f = DemoFragment()
-            f.arguments = Bundle()
-            f.arguments.putCharSequence(KEY_TEXT, text)
+            val arguments = Bundle()
+            arguments.putCharSequence(KEY_TEXT, text)
+            f.arguments = arguments
             return f
         }
     }
@@ -30,7 +31,7 @@ open class DemoFragment : BaseFragment() {
         val rootView = inflater.inflate(R.layout.fragment_demo, container, false)
         mTextView = rootView.findViewById(android.R.id.text1)
         if (null != arguments) {
-            mTextView!!.setText(arguments.getString(KEY_TEXT))
+            mTextView!!.setText(arguments!!.getString(KEY_TEXT))
         }
         return rootView
     }

@@ -13,8 +13,9 @@ class TimeFragment : DemoFragment() {
 
         fun newInstance(): TimeFragment {
             val f = TimeFragment()
-            f.arguments = Bundle()
-            f.arguments.putCharSequence(KEY_TEXT, TAG)
+            val arguments = Bundle()
+            arguments.putCharSequence(KEY_TEXT, TAG)
+            f.arguments = arguments
             return f
         }
     }

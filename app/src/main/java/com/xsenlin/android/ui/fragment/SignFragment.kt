@@ -30,7 +30,7 @@ class SignFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_sign, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view!!, savedInstanceState)
         etPhone = view.findViewById(R.id.et_phone)
     }

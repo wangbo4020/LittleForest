@@ -55,8 +55,7 @@ class FirstFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val inflater = getLayoutInflater(savedInstanceState)
-        mAdapter = HomeFirstAdapter(inflater, mData)
+        mAdapter = HomeFirstAdapter(getLayoutInflater(), mData)
         mLayoutManger.spanSizeLookup = HomeFirstSpanSizeLookup(mData)
     }
 
@@ -64,7 +63,7 @@ class FirstFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mSwipeRefresh = view!!.findViewById(R.id.swipe_refresh_widget)
         mSwipeRefresh!!.setOnRefreshListener(this)
@@ -204,7 +203,7 @@ class FirstFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     inner class IndependentAdapter<H : MultiViewHolder>(val inflater: LayoutInflater, val parentType: Int) : RecyclerView.Adapter<H>() {
         var data: StorySimple.StorySimpleList? = null
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): H {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): H {
             return when (parentType) {
                 HomeFirstGroup.TYPE_STORIES -> IndependentHolder(ItemStoryActualBinding.inflate(inflater, parent, false))
                 else -> throw NullPointerException("Not found the parentType $parentType")

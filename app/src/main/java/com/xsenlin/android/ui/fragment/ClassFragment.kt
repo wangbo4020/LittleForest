@@ -44,19 +44,19 @@ class ClassFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mAdapter = ClassAdapter(context, getLayoutInflater(savedInstanceState), mData)
+        mAdapter = ClassAdapter(context!!, getLayoutInflater(), mData)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_class, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view!!, savedInstanceState)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-        toolbar.setNavigationOnClickListener({ fragmentManager.popBackStack() })
+        toolbar.setNavigationOnClickListener({ fragmentManager!!.popBackStack() })
 
         setupContentLoading(view)
         hideContentLoading()
@@ -118,7 +118,7 @@ class ClassFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     inner class ClassAdapter(val context: Context, val inflater: LayoutInflater, val data: Array<String>) : RecyclerView.Adapter<ClassHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ClassHolder = ClassHolder(ItemClassBinding.inflate(inflater, parent, false))
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassHolder = ClassHolder(ItemClassBinding.inflate(inflater, parent, false))
 
         override fun onBindViewHolder(holder: ClassHolder, position: Int) {
             holder.bindTo(position == 0, data.get(position))
