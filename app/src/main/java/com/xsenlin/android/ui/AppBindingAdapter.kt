@@ -116,7 +116,7 @@ object AppBindingAdapter {
 
         if (printLog) Log.d(TAG, "setImageUrl trans " + trans + " loading $loading url " + url + " " + view.width + " " + view.measuredWidth + " " + url)
 
-        val creator = Picasso.with(view.context).load(url)
+        val creator = Picasso.get().load(url)
         when (trans) {
             TRANSFORM_BASIS_SCALE -> {
                 val targetSize = view.width

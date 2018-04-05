@@ -70,7 +70,7 @@ class GoodsFragment : BaseFragment() {
 
             mHandler.post {
                 android.util.Log.d("III", "instantiateItem load " + mCovers[position] + ", height " + container.height)
-                Picasso.with(context)
+                Picasso.get()
                         .load(mCovers[position])
                         .transform(BasisScaleTransformation(image.tag as String, container.height, BasisScaleTransformation.BASIS_HEGHT))
                         .into(image, object : Callback.EmptyCallback() {

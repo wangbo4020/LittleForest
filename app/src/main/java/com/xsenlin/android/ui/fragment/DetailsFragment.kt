@@ -52,13 +52,13 @@ class DetailsFragment : BaseFragment() {
         val image3 = view.findViewById<ImageView>(R.id.image3)
 
         mHandler.post {
-            Picasso.with(context).load("file:///android_asset/demo/details_0_0.webp")
+            Picasso.get().load("file:///android_asset/demo/details_0_0.webp")
                     .transform(BasisScaleTransformation("file:///android_asset/demo/details_0_0.webp", image1.width))
                     .into(image1)
-            Picasso.with(context).load("file:///android_asset/demo/details_0_1.webp")
+            Picasso.get().load("file:///android_asset/demo/details_0_1.webp")
                     .transform(BasisScaleTransformation("file:///android_asset/demo/details_0_1.webp", image2.width))
                     .into(image2)
-            Picasso.with(context).load("file:///android_asset/demo/details_0_2.webp")
+            Picasso.get().load("file:///android_asset/demo/details_0_2.webp")
                     .transform(BasisScaleTransformation("file:///android_asset/demo/details_0_2.webp", image3.width))
                     .into(image3, object : Callback.EmptyCallback() {
                         override fun onSuccess() {
