@@ -1,24 +1,21 @@
 package com.xsenlin.android.ui.fragment
 
-import android.graphics.Point
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
+import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.tmall.ultraviewpager.UltraViewPager
+import com.tmall.ultraviewpager.transformer.UltraScaleTransformer
 import com.xsenlin.android.R
 import com.xsenlin.android.databinding.ItemHomeBinding
 import com.xsenlin.android.ui.StartFragment
-import com.yarolegovich.discretescrollview.DiscreteScrollView
-import com.yarolegovich.discretescrollview.InfiniteScrollAdapter
-import com.yarolegovich.discretescrollview.Orientation
-import com.yarolegovich.discretescrollview.transform.ScaleTransformer
 
 
 /**
  * Created by Dylan on 2017/8/31.
  */
-class HomeFragment : BaseFragment(), DiscreteScrollView.OnItemChangedListener<HomeFragment.HomeHolder> {
+class HomeFragment : BaseFragment() {
 
     companion object {
         val TAG = "HomeFragment"
@@ -35,17 +32,9 @@ class HomeFragment : BaseFragment(), DiscreteScrollView.OnItemChangedListener<Ho
                 "file:///android_asset/demo/card_3.webp")
     }
 
-    private var mDiscreteWidget: DiscreteScrollView? = null
-    private var mAdapter: InfiniteScrollAdapter<HomeHolder>? = null
+    private val mDiscreteWidget by lazy { view!!.findViewById(R.id.ultra_viewpager) as UltraViewPager }
+    private val mAdapter: PagerAdapter by lazy { HomeAdapter(layoutInflater, mData) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mAdapter = InfiniteScrollAdapter.wrap(HomeAdapter(getLayoutInflater(), mData))
-        val p = Point()
-        activity!!.getWindowManager().defaultDisplay.getSize(p)
-
-        android.util.Log.d(TAG, "screen " + p + ", density " + resources.displayMetrics.density)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -53,52 +42,32 @@ class HomeFragment : BaseFragment(), DiscreteScrollView.OnItemChangedListener<Ho
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mDiscreteWidget = view.findViewById(R.id.discrete_widget)
-        mDiscreteWidget!!.setOrientation(Orientation.HORIZONTAL)
         mDiscreteWidget!!.adapter = mAdapter
-        mDiscreteWidget!!.setItemTransitionTimeMillis(150)
-        mDiscreteWidget!!.setItemTransformer(ScaleTransformer.Builder().setMinScale(0.9f).build())
-        mDiscreteWidget!!.addOnItemChangedListener(this)
+        mDiscreteWidget.setMultiScreen(0.72f)
+        mDiscreteWidget.setItemRatio(1.0)
+        mDiscreteWidget.setPageTransformer(false, UltraScaleTransformer())
     }
 
-    override fun onCurrentItemChanged(viewHolder: HomeHolder?, adapterPosition: Int) {
-        val position = mAdapter!!.getRealPosition(adapterPosition)
-//        android.util.Log.d(TAG, "onCurrentItemChanged " + position)
-    }
+    inner class HomeAdapter(val inflater: LayoutInflater, val data: Array<String>) : PagerAdapter() {
+        override fun isViewFromObject(view: View, `object`: Any) = view == `object`
 
-    override fun onDestroyView() {
-//        mDiscreteWidget?.adapter = null
-        super.onDestroyView()
-    }
+        override fun getCount() = data?.size
 
-    inner class HomeHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-        override fun onClick(v: View?) {
-            val act = activity
-            if (act is StartFragment) {
-                act.startFragment(ClassFragment.newInstance(), ClassFragment.TAG)
+        override fun instantiateItem(container: ViewGroup, position: Int): Any {
+            val inflate = ItemHomeBinding.inflate(inflater, container, true)
+            inflate.data = data[position]
+            inflate.image.tag = data[position]
+            inflate.image.setOnClickListener {
+                val act = activity
+                if (act is StartFragment) {
+                    act.startFragment(ClassFragment.newInstance(), ClassFragment.TAG)
+                }
             }
+            return inflate.root
         }
 
-        fun bindTo(data: String) {
-            binding.image.tag = data
-            binding.data = data
-            binding.image.setOnClickListener(this)
+        override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+            container.removeView(`object` as View)
         }
-    }
-
-    inner class HomeAdapter(val inflater: LayoutInflater, val data: Array<String>) : RecyclerView.Adapter<HomeHolder>() {
-//        private val mProgress: ContentLoadingDelegate by lazy { ContentLoadingDelegate() }
-        override fun onBindViewHolder(holder: HomeHolder, position: Int) {
-//            mProgress.setup(R.id.content_loading_widget, holder.itemView)
-//            mProgress.show()
-            holder.bindTo(mData[position])
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeHolder {
-            return HomeHolder(ItemHomeBinding.inflate(inflater))
-        }
-
-        override fun getItemCount(): Int = data.size
-
     }
 }
