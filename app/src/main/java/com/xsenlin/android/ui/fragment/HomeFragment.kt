@@ -35,7 +35,6 @@ class HomeFragment : BaseFragment() {
     private val mDiscreteWidget by lazy { view!!.findViewById(R.id.ultra_viewpager) as UltraViewPager }
     private val mAdapter: PagerAdapter by lazy { HomeAdapter(layoutInflater, mData) }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -43,9 +42,7 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mDiscreteWidget!!.adapter = mAdapter
-        mDiscreteWidget.setMultiScreen(0.72f)
-        mDiscreteWidget.setItemRatio(1.0)
-        mDiscreteWidget.setPageTransformer(false, UltraScaleTransformer())
+        mDiscreteWidget.setPageTransformer(false, UltraScaleTransformer(1f))
     }
 
     inner class HomeAdapter(val inflater: LayoutInflater, val data: Array<String>) : PagerAdapter() {

@@ -30,11 +30,22 @@
         android:layout_marginTop="9dp"
         android:text="春天种植一颗幸福树，秋天收获满满的幸福" />
 
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
     <com.tmall.ultraviewpager.UltraViewPager
         android:id="@+id/ultra_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:upv_infiniteloop="true"
+        android:layout_height="wrap_content"
+        app:upv_multiscreen="75%p"
+        app:upv_itemratio="100%p"
         app:upv_automeasure="true"
-        android:layout_marginTop="26dp" />
+        app:upv_infiniteloop="true" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 </LinearLayout>
