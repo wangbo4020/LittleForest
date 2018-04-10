@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,9 +30,22 @@
         android:layout_marginTop="9dp"
         android:text="春天种植一颗幸福树，秋天收获满满的幸福" />
 
-    <com.yarolegovich.discretescrollview.DiscreteScrollView
-        android:id="@+id/discrete_widget"
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.tmall.ultraviewpager.UltraViewPager
+        android:id="@+id/ultra_viewpager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="26dp" />
+        app:upv_multiscreen="75%p"
+        app:upv_itemratio="100%p"
+        app:upv_automeasure="true"
+        app:upv_infiniteloop="true" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 </LinearLayout>
